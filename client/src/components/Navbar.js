@@ -17,7 +17,7 @@ class Navbar extends React.Component {
             <Link to={`/signup`}>Signup/Login</Link>
           </button>
           <button>
-            <Link to={this.state.loggedInUser ? `/favorites` : "/signup"}>
+            <Link to={this.props.user? `/favorites` : "/signup"}>
               MY FAVORITES
             </Link>
           </button>

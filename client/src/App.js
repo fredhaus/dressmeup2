@@ -46,7 +46,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="all">
-          <Navbar logouthandler={this.logouthandler}>
+          <Navbar logouthandler={this.logouthandler} user={this.state.loggedInUser}>
 
           </Navbar>
           <h1>
