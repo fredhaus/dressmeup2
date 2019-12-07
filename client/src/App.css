@@ -190,7 +190,7 @@
   top: 0;
   width: 200px;
   height: auto;
-  opacity: 100%;
+  opacity: 1;
   transform: translateX(0%);
   transition-property: all;
   transition-duration: 0.5s;
@@ -228,7 +228,7 @@
   
   margin-top: -20px;
   height: 200px;
-  opacity: 100%;
+  opacity: 1;
   transform: translateX(0%);
   transition-property: all;
   transition-duration: 0.5s;
@@ -266,7 +266,7 @@
 .slideImageBottom{
   margin-top: -40px;
   height: 215px;
-  opacity: 100%;
+  opacity: 1;
   transform: translateX(0%);
   transition-property: all;
   transition-duration: 0.5s;
@@ -300,7 +300,7 @@
   margin-top: 0px; 
   width: 180px;
   height: 55px;
-  opacity: 100%;
+  opacity: 1;
   vertical-align: bottom ;
   position: relative;
   transform: translateX(0%);
