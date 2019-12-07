@@ -1,17 +1,23 @@
 import React from "react";
 import { Link, Redirect, Switch, Route } from "react-router-dom";
-import RandomClothes2 from "./components/RandomClothes_copy";
-import Navbar from "./components/Navbar"
+// import Navbar from "./components/Navbar"
+import device from "current-device"; //{console.log('device.mobile() === %s', device.mobile())} ==> True // False
+import "typeface-roboto";
 
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Favorites from "./components/Favorites";
 import axios from "axios";
-
 import logo from "./logo.svg";
-import "./App.css";
 import Feed from "./components/Feed";
+import Navbar from "./components/Navbar";
+import RandomClothes2 from "./components/RandomClothes_copy";
+import NavbarRS from "./components/NavbarRS";
+
+// const [collapsed, setCollapsed] = useState(true);
+
+// const toggleNavbar = () => setCollapsed(!collapsed);
 
 class App extends React.Component {
   state = {
@@ -46,31 +52,28 @@ class App extends React.Component {
     return (
       <div>
         <div className="all">
-          <Navbar logouthandler={this.logouthandler} user={this.state.loggedInUser}>
+        <Link to={`/`}>
+        <img className="left dmulogo" src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575754803/dmulogo_saeiru.png" alt=""/>
+        </Link>
+          <div className="right">
+            <NavbarRS></NavbarRS>
+          </div>
+          
+            
+          
+          {/* <Navbar logouthandler={this.logouthandler} user={this.state.loggedInUser}>
 
-          </Navbar>
-          <h1>
+          </Navbar> */}
+
+          <div className="break"></div>
+          <h6>
             Hello{" "}
             {this.state.loggedInUser
               ? this.state.loggedInUser.username
               : "Stranger"}{" "}
             !
-          </h1>
+          </h6>
           <br />
-          {/* <button><Link to={`/`}>HOME</Link></button>
-          <button onClick={this.logouthandler}>Logout</button>
-          <button>
-            <Link to={`/signup`}>Signup/Login</Link>
-          </button>
-          <button>
-            <Link to={this.state.loggedInUser ? `/favorites` : "/signup"}>
-              MY FAVORITES
-            </Link>
-          </button>
-          <button>            
-            <Link to={"/feed"}>
-              FEEED
-            </Link></button> */}
 
           <div className="break"></div>
           <Switch>
@@ -106,8 +109,8 @@ class App extends React.Component {
                   <div>
                     <Favorites user={this.state.loggedInUser}></Favorites>
                   </div>
-                )}}
-
+                );
+              }}
             ></Route>
             <Route
               path="/feed"
@@ -116,22 +119,22 @@ class App extends React.Component {
                   <div>
                     <Feed user={this.state.loggedInUser}></Feed>
                   </div>
-                )}}
-
+                );
+              }}
             ></Route>
             <Route
-                exact
-                path="/:id"
-                render={() => (
-                  <div>
-                    {/* <RandomClothes user={this.state.loggedInUser} updateUserImage={this.updateUserImage}></RandomClothes> */}
-                    <RandomClothes2
-                      user={this.state.loggedInUser}
-                      updateUserImage={this.updateUserImage}
-                    ></RandomClothes2>
-                  </div>
-                )}
-              ></Route>
+              exact
+              path="/:id"
+              render={() => (
+                <div>
+                  {/* <RandomClothes user={this.state.loggedInUser} updateUserImage={this.updateUserImage}></RandomClothes> */}
+                  <RandomClothes2
+                    user={this.state.loggedInUser}
+                    updateUserImage={this.updateUserImage}
+                  ></RandomClothes2>
+                </div>
+              )}
+            ></Route>
           </Switch>
         </div>
       </div>

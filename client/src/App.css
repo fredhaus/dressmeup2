@@ -30,11 +30,24 @@
   text-align: center;
 }
 
-.navbar{
-  background-color: green;
-  height: 100px;
-  width: 100%;
+.right{
+  margin-left: auto;
 }
+
+.left{
+  margin-right: auto;
+}
+
+.dmulogo{
+  height: 50px;
+  margin: 20px;
+}
+
+.menuicon{
+  height:30px;
+  margin: 10px;
+}
+
 .randomClothes{
   display: flex;
   align-items: center;
@@ -43,8 +56,15 @@
 
 
 .backgroundSilouette {
-  height: 550px;
+  border: 2px dotted grey;
+  filter: drop-shadow(0 0 0.5rem crimson);
+  border-radius: 45px;
+  background:#ffffdc;
+  /* background-image: linear-gradient(red, yellow, blue); */
+  padding: 20px;
+  height: 531px;
   width: 229px;
+  background-position-y: 20px;
   background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
   background-size: contain;
   background-repeat: no-repeat;
@@ -53,7 +73,8 @@
   flex-direction: column;
   z-index: 0;
 }
-.backgroundSilouette50 {
+
+/* .backgroundSilouette50 {
   height: 550px;
   width: 229px;
   background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
@@ -64,7 +85,7 @@
   align-items: center;
   flex-direction: column;
   z-index: 0;
-}
+} */
 
 
 .face {
@@ -236,17 +257,24 @@
 }
 
 .slideImageRightTop{
-
   position: absolute;
   left: 0;
   top: 0;
   margin-top: -20px;
   opacity: 0%;
   height: 200px;
-  transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
+  transform: translateX(100%) rotate3d(0, 1, 0, 90deg) scale(0.8, 0.8);
   /* transition-property: all;
   transition-duration: 0.5s;
   transition-timing-function:ease;   */
+}
+
+.displayNone{
+  display:none;
+}
+
+.slideImageLeftDisplayNone{
+  display:none;
 }
 
 .slideImageLeftTop{
@@ -257,7 +285,7 @@
   height: 200px;
   opacity: 0%;
   margin-top: -20px;
-  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
+  transform: translateX(-100%) rotate3d(0, 1, 0, 90deg) scale(0.8, 0.8);
   transition-property: all;
   transition-duration: 0.5s;
   transition-timing-function:ease;

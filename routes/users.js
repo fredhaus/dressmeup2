@@ -25,7 +25,12 @@ router.post("/imageupload", function(req, res, next) {
   });
 
   cloudinary.uploader.upload(dataUri, (err, result) => {
-    // console.log("result :", result);
+    
+    if (err){
+      console.log(err)
+    }
+    console.log("result :", result);
+    
     let imageUrl = result.url.replace('upload', 'upload' + cloudinaryPreset)
 
     User.findByIdAndUpdate(req.user._id, {headPic: imageUrl} ).then(foundUser => {
