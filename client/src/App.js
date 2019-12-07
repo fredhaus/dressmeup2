@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Redirect, Switch, Route } from "react-router-dom";
 import RandomClothes2 from "./components/RandomClothes_copy";
+import Navbar from "./components/Navbar"
 
 import "./App.css";
 import Login from "./components/Login";
@@ -45,6 +46,9 @@ class App extends React.Component {
     return (
       <div>
         <div className="all">
+          <Navbar logouthandler={this.logouthandler}>
+
+          </Navbar>
           <h1>
             Hello{" "}
             {this.state.loggedInUser
@@ -53,7 +57,7 @@ class App extends React.Component {
             !
           </h1>
           <br />
-          <button><Link to={`/`}>HOME</Link></button>
+          {/* <button><Link to={`/`}>HOME</Link></button>
           <button onClick={this.logouthandler}>Logout</button>
           <button>
             <Link to={`/signup`}>Signup/Login</Link>
@@ -66,7 +70,7 @@ class App extends React.Component {
           <button>            
             <Link to={"/feed"}>
               FEEED
-            </Link></button>
+            </Link></button> */}
 
           <div className="break"></div>
           <Switch>

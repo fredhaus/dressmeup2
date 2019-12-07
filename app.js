@@ -46,7 +46,6 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb', extended: true }));
-app.use(express.static(path.join(__dirname, '/client/build')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
@@ -54,7 +53,6 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, '/client/build')));
 
-app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/garments', garmentsRouter);
@@ -62,6 +60,11 @@ app.use('/api/garments', garmentsRouter);
 // catch 404 and forward to error handler
 app.use('/api', function(req, res, next) {
   next(createError(404));
+});
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 // error handler
@@ -75,11 +78,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.json({ message: err.message });
-});
-
-app.use((req, res, next) => {
-  // If no routes match, send them the React HTML.
-  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 module.exports = app;
