@@ -6,6 +6,7 @@ import Slider from "./Slider";
 import Slide3 from "./Slide_3";
 import Slide4 from "./Slide_4";
 import { withRouter } from "react-router-dom";
+import CameraMobile from "./CameraMobile";
 
 let hm_url_base = "https://www2.hm.com";
 let transSpeed = 0.5
@@ -315,6 +316,9 @@ class AddProject extends React.Component {
           user={this.props.user}
           updateUserImage={this.props.updateUserImage}
         ></UploadPhoto>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    
+        <CameraMobile></CameraMobile>
       </div>
     );
   }
