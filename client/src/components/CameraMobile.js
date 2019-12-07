@@ -13,7 +13,7 @@ class CameraMobile extends React.Component {
       <div>
         <h1>CameraMobile</h1>
          <form onSubmit={this.submitHandler}>
-         <input name="camera" type="file" accept="image/*" capture="camera" />
+         <input type="file" accept="image/*"/>
           <button type="submit">Submit</button>
         </form>
       </div>
