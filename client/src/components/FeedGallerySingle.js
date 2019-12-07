@@ -18,12 +18,12 @@ class SingleFavoriteGallery extends React.Component {
   };
 
   render() {
+    const height = 300;
     return (
-      <div className="backgroundSilouette">
-        <button onClick={this.onClickConsoleLog}>CONSOOOOLE</button>
+      <div className="backgroundSilouetteResponsive" style={{ height }}>
+        
         <img
-          className="face"
-          width="90px"
+          className="faceResponsive"
           src={
             this.state.outfit.owner.headPic
           }
@@ -35,29 +35,29 @@ class SingleFavoriteGallery extends React.Component {
           alt="Face"
         />
 
-        <div className="topImageDiv slider">
+        <div className="topImageDivResponsive">
         <a target="_blank" href={hm_url_base + this.state.outfit.topImage.linkPdp}>
-          <img className="slideImageTop" src={this.state.outfit.topImage.imageUrl} alt="" />
+          <img className="topImageResponsive" src={this.state.outfit.topImage.imageUrl} alt="" />
         </a>
         </div>
-        <div className="bottomImageDiv slider">
+        <div className="bottomImageDivResponsive">
         <a target="_blank" href={hm_url_base + this.state.outfit.bottomImage.linkPdp}>
           <img
-            className="slideImageBottom"
+            className="bottomImageResponsive"
             src={this.state.outfit.bottomImage.imageUrl}
             alt=""
           />
           </a>
         </div>
-        <div className="shoes slider">
+        <div className="shoesResponsive">
         <a target="_blank" href={hm_url_base + this.state.outfit.shoeImage.linkPdp}>
           <img
-            className="slideImageShoe"
+            className="shoeImageLeftResponsive"
             src={this.state.outfit.shoeImage.imageUrl}
             alt=""
           />
           <img
-            className="slideImageShoe"
+            className="shoeImageResponsive"
             src={this.state.outfit.shoeImage.imageUrl}
             alt=""
           />

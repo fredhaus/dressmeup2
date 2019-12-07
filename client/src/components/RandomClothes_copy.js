@@ -101,10 +101,7 @@ class AddProject extends React.Component {
   };
 
   fillTopArryay = () => {
-    console.log("FILLING TopArr")
-
     axios.get(`/api/garments/get_m_many_tops?limit=${limit}&offset=${this.state.topArr.length}`, this.state).then(response => {
-      console.log("TOP: ", response);
       let newData = _.shuffle(response.data)
       this.setState({
         topArr: [...this.state.topArr, ...newData]
@@ -113,10 +110,9 @@ class AddProject extends React.Component {
   };
 
   fillBottomArryay = () => {
-    console.log("FILLING BottomArr")
+    
 
     axios.get(`/api/garments/get_m_many_bottoms?limit=${limit}&offset=${this.state.topArr.length}`, this.state).then(response => {
-      console.log("BOTTOM: ", response);
       this.setState({
         bottomArr: [...this.state.bottomArr, ...response.data]
       });
@@ -124,10 +120,7 @@ class AddProject extends React.Component {
   };
 
   fillShoeArryay = () => {
-    console.log("FILLING ShoeArr")
-
     axios.get(`/api/garments/get_m_many_shoes?limit=${limit}&offset=${this.state.topArr.length}`, this.state).then(response => {
-      console.log("SHOE: ", response);
       this.setState({
         shoeArr: [...this.state.shoeArr, ...response.data]
       });

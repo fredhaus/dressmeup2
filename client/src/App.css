@@ -29,6 +29,12 @@
   align-items: center;
   text-align: center;
 }
+
+.navbar{
+  background-color: green;
+  height: 100px;
+  width: 100%;
+}
 .randomClothes{
   display: flex;
   align-items: center;
@@ -348,4 +354,83 @@
 
 .buttonTest{
   color: blue;
+}
+
+
+
+
+
+
+
+.backgroundSilouetteResponsive {
+  height: 275px;
+  width: 114px;
+  background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 0;
+}
+
+
+.faceResponsive {
+  z-index: 3;
+  height: 42px;
+  margin-right: 5px;
+  width: auto;
+}
+
+
+.topImageResponsive {
+  /* z-index: 0; */
+  margin-top: -10px;
+  height: 100px;
+  opacity: 1;
+}
+
+.topImageDivResponsive {
+  z-index: 2;
+}
+
+
+.bottomImageResponsive {
+  margin-top: -20px;
+  height: 107px;
+  opacity: 1;
+}
+
+.bottomImageDivResponsive {
+  z-index: 1;
+  opacity: 1;
+}
+
+.shoesResponsive {
+  z-index: 0;
+  opacity: 1;
+  margin-top: -10px; 
+  width: 90px;
+  height: 27px;
+  vertical-align: bottom ;
+  position: relative
+}
+
+.shoeImageResponsive {
+  position: absolute;
+  z-index: 1;
+  width: 40px;
+  height: auto;
+  bottom: 0;
+  left:45px
+}
+
+.shoeImageLeftResponsive {
+  position: absolute;
+  left: 5px;
+  bottom: 0;
+  z-index: 1;
+  transform: rotateY(180deg);
+  height: auto;
+  width: 40px;
 }
