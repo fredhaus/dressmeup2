@@ -62,11 +62,6 @@ app.use('/api', function(req, res, next) {
   next(createError(404));
 });
 
-app.use((req, res, next) => {
-  // If no routes match, send them the React HTML.
-  res.sendFile(__dirname + "/client/build/index.html");
-});
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -78,6 +73,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.json({ message: err.message });
+});
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 module.exports = app;
