@@ -1,0 +1,351 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.all {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: red;
+  align-items: center;
+  text-align: center;
+}
+.randomClothes{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.backgroundSilouette {
+  height: 550px;
+  width: 229px;
+  background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 0;
+}
+.backgroundSilouette50 {
+  height: 550px;
+  width: 229px;
+  background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
+  opacity: 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 0;
+}
+
+
+.face {
+  z-index: 3;
+  height: 85px;
+  margin-right: 5px;
+  width: auto;
+}
+
+
+.topImage {
+  /* z-index: 0; */
+  margin-top: -20px;
+  height: 200px;
+  opacity: 1;
+}
+
+.topImageDiv {
+  z-index: 2;
+}
+
+
+.bottomImage {
+  margin-top: -40px;
+  height: 215px;
+  opacity: 1;
+}
+
+.bottomImageDiv {
+  z-index: 1;
+  opacity: 1;
+}
+
+.shoes {
+  z-index: 0;
+  opacity: 1;
+  margin-top: -20px; 
+  width: 180px;
+  height: 55px;
+  vertical-align: bottom ;
+  position: relative
+}
+
+.shoesSF {
+  opacity: 1;
+  margin-top: -20px; 
+  width: 78%;
+  height: 10%;
+  vertical-align: bottom ;
+  position: relative
+}
+
+.shoeImage {
+  position: absolute;
+  z-index: 1;
+  width: 80px;
+  height: auto;
+  bottom: 0;
+  left:90px
+}
+
+.shoeImageLeft {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  z-index: 1;
+  transform: rotateY(180deg);
+  height: auto;
+  width: 80px;
+}
+
+.cardwrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.photo{
+  width: 300px;
+  height: auto;
+  position: relative;
+  /* display: flex; */
+}
+
+.photoMaskOverlay{
+  position: absolute;
+  z-index: 1;
+}
+
+.photoCamera{
+  position: absolute;
+}
+
+.photoMaskOverlayImage{
+  position: absolute;
+  width: 100%;
+  height: auto;
+  z-index: 2;
+  top: 0;
+  left: 0
+}
+
+#container-circles{
+  z-index: 3;
+}
+
+/* .cameraViewfinder{
+  width: 200px;
+  height: auto;
+} */
+
+.slider{
+  position: relative;
+}
+
+/* .slideImage{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: auto;
+  opacity: 100%;
+  transform: translateX(0%);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+} */
+
+/* 
+.slideImageRight{
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0%;
+  width: 150px;
+  height: auto;
+  transform: translateX(100%);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideImageLeft{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 150px;
+  height: auto;
+  opacity: 0%;
+  transform: translateX(-100%);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+} */
+
+.slideImageTop{
+  
+  margin-top: -20px;
+  height: 200px;
+  opacity: 100%;
+  transform: translateX(0%);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideImageRightTop{
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: -20px;
+  opacity: 0%;
+  height: 200px;
+  transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
+  /* transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;   */
+}
+
+.slideImageLeftTop{
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 200px;
+  opacity: 0%;
+  margin-top: -20px;
+  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideImageBottom{
+  margin-top: -40px;
+  height: 215px;
+  opacity: 100%;
+  transform: translateX(0%);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideImageRightBottom{
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0%;
+  height: 215px;
+  margin-top: -40px;
+  transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);;
+}
+
+.slideImageLeftBottom{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 215px;
+  opacity: 0%;
+  margin-top: -40px;
+  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideImageShoe{
+  margin-top: 0px; 
+  width: 180px;
+  height: 55px;
+  opacity: 100%;
+  vertical-align: bottom ;
+  position: relative;
+  transform: translateX(0%);
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideImageRightShoe{
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0%;
+  margin-top: -20px; 
+  width: 180px;
+  height: 55px;
+  transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
+}
+
+.slideImageLeftShoe{
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0%;
+  margin-top: -20px; 
+  width: 180px;
+  height: 55px;
+  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function:ease;
+}
+
+.slideShoeRight{
+  position: absolute;
+  width: 80px;
+  height: auto;
+  bottom: 0;
+  left:90px
+}
+
+.slideShoeLeft{
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  z-index: 1;
+  transform: rotateY(180deg);
+  height: auto;
+  width: 80px;
+}
+
+.buttonTest{
+  color: blue;
+}
