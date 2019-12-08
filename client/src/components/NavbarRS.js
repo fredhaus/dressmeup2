@@ -38,7 +38,7 @@ export default function TemporaryDrawer() {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   });
 
   const toggleDrawer = (side, open) => event => {
@@ -80,7 +80,7 @@ export default function TemporaryDrawer() {
           </ListItem>
         </Link>
 
-        <Link style={{ textDecoration: "none", color: "black" }} to={`/feed`}>
+        <Link style={{ textDecoration: "none", color: "black" }} >
           <ListItem button>
             <ListItemIcon>
               {" "}

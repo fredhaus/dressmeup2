@@ -8,8 +8,28 @@ import Slide4 from "./Slide_4";
 import { withRouter } from "react-router-dom";
 import CameraMobile from "./CameraMobile";
 
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import FavoriteBorderTwoToneIcon from "@material-ui/icons/FavoriteBorderTwoTone";
+import AddAPhotoTwoToneIcon from "@material-ui/icons/AddAPhotoTwoTone";
+
+let colors = [
+  "crimson",
+  "#c203fc",
+  "#ce03fc",
+  "#030ffc",
+  "#ba0000",
+  "#5e03fc",
+  "#0380fc",
+  "#00ba13",
+  "#03befc",
+  "#03fc77",
+  "#e3fc03",
+  "#fcc603",
+  "#fc3903"
+];
 let hm_url_base = "https://www2.hm.com";
 let transSpeed = 0.5;
+let bgColor = "crimson";
 let limit = 100;
 
 class AddProject extends React.Component {
@@ -25,17 +45,26 @@ class AddProject extends React.Component {
     currentIndexTop: -1,
     currentIndexBottom: -1,
     currentIndexShoe: -1,
-    deleteIDs: []
+    deleteIDs: [],
+    shuffle: false,
+    photo: false
   };
 
   shuffle = async () => {
+    this.setState(prevState => ({
+      shuffle: !prevState.shuffle
+    }));
+
+    let ShuffledColors = _.shuffle(colors);
+
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
-    let sleepTime = 200;
+    let sleepTime = 300;
     let shuffleNr = 10;
 
     for (let index = 1; index < shuffleNr; index++) {
+      bgColor = ShuffledColors[index];
       if (index < shuffleNr / 2) {
         sleepTime = sleepTime - 30;
       } else {
@@ -48,6 +77,11 @@ class AddProject extends React.Component {
       });
     }
     transSpeed = 0.5;
+    bgColor = "crimson";
+
+    this.setState(prevState => ({
+      shuffle: !prevState.shuffle
+    }));
   };
 
   goToNextSlide = () => {
@@ -145,17 +179,24 @@ class AddProject extends React.Component {
   };
 
   onClickFavoriteHandler = () => {
-    let topId = this.state.topArr[this.state.currentIndexTop]._id;
-    let bottomId = this.state.bottomArr[this.state.currentIndexBottom]._id;
-    let shoeId = this.state.shoeArr[this.state.currentIndexShoe]._id;
-    let user = this.state.user._id;
-    axios
-      .post(
-        `/api/garments/favorite?topId=${topId}&bottomId=${bottomId}&shoeId=${shoeId}&user=${user}`
-      )
-      .then(response => {
-        console.log(response);
-      });
+    try {
+      this.setState(prevState => ({
+        favorite: !prevState.favorite
+      }));
+      let topId = this.state.topArr[this.state.currentIndexTop]._id;
+      let bottomId = this.state.bottomArr[this.state.currentIndexBottom]._id;
+      let shoeId = this.state.shoeArr[this.state.currentIndexShoe]._id;
+      let user = this.state.user._id;
+      axios
+        .post(
+          `/api/garments/favorite?topId=${topId}&bottomId=${bottomId}&shoeId=${shoeId}&user=${user}`
+        )
+        .then(response => {
+          console.log(response);
+        });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   onClickConsoleLog = () => {
@@ -189,255 +230,302 @@ class AddProject extends React.Component {
     });
   };
 
+  togglePhoto = () => {
+    this.setState(prevState => ({
+      photo: !prevState.photo
+    }))
+  }
+
   render() {
     return (
-      <div className="randomClothes">
-        <button onClick={this.onClickFavoriteHandler}>
-          FAVORITE this outfit
-        </button>
-        <br></br>
+      <div style={{height: "800px"}}>
+        {!this.state.photo ? (
+          <div className="flex">
+            <AddAPhotoTwoToneIcon onClick={this.togglePhoto}
+              style={{
+                width: "35px",
+                height: "35px",
+                marginTop: "20px",
+                marginRight: "20px"
+              }}
+            />
+            <div className="randomClothes">
+              {this.state.topArr.length !== 0 ||
+              this.state.bottomArr.length !== 0 ||
+              this.state.shoeArr.length !== 0 ? (
+                <div>
+                  <div
+                    className="backgroundSilouette"
+                    style={{ filter: `drop-shadow(0 0 0.5rem ${bgColor})` }}
+                  >
+                    <img
+                      className="face"
+                      width="90px"
+                      // src={this.user.headPic}
+                      src={
+                        this.props.user
+                          ? this.props.user.headPic
+                          : "https://res.cloudinary.com/dok2ttvhu/image/upload/v1574844969/default_face_jaglaw.png"
+                      }
+                      //"https://res.cloudinary.com/dok2ttvhu/image/upload/v1574796842/arnieProxyFace_ttegde.png"
+                      alt="Face"
+                    />
 
-        {this.state.topArr.length !== 0 ||
-        this.state.bottomArr.length !== 0 ||
-        this.state.shoeArr.length !== 0 ? (
-          <div>
-            <div className="backgroundSilouette">
-              <img
-                className="face"
-                width="90px"
-                // src={this.user.headPic}
-                src={
-                  this.props.user
-                    ? this.props.user.headPic
-                    : "https://res.cloudinary.com/dok2ttvhu/image/upload/v1574844969/default_face_jaglaw.png"
-                }
-                //"https://res.cloudinary.com/dok2ttvhu/image/upload/v1574796842/arnieProxyFace_ttegde.png"
-                alt="Face"
-              />
+                    <div className="topImageDiv slider">
+                      {this.state.topArr.map((topObj, i) =>
+                        this.state.currentIndexTop === -1 ? (
+                          <Slide3
+                            key={i}
+                            image={topObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={topObj.linkPdp}
+                            subClass="displayNone"
+                            transSpeed={transSpeed}
+                          />
+                        ) : this.state.currentIndexTop >= i ? (
+                          this.state.currentIndexTop > i ? (
+                            this.state.currentIndexTop > i + 2 ? (
+                              <Slide3
+                                key={i}
+                                image={topObj.imageUrl}
+                                urlBase={hm_url_base}
+                                urlKey={topObj.linkPdp}
+                                subClass="displayNone"
+                                transSpeed={transSpeed}
+                              />
+                            ) : (
+                              <Slide3
+                                key={i}
+                                image={topObj.imageUrl}
+                                urlBase={hm_url_base}
+                                urlKey={topObj.linkPdp}
+                                subClass="slideImageLeftTop"
+                                transSpeed={transSpeed}
+                              />
+                            )
+                          ) : (
+                            <Slide3
+                              key={i}
+                              image={topObj.imageUrl}
+                              urlBase={hm_url_base}
+                              urlKey={topObj.linkPdp}
+                              subClass="slideImageTop"
+                              transSpeed={transSpeed}
+                            />
+                          )
+                        ) : this.state.currentIndexTop < i - 2 ? (
+                          <Slide3
+                            key={i}
+                            image={topObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={topObj.linkPdp}
+                            subClass="displayNone"
+                          />
+                        ) : (
+                          <Slide3
+                            key={i}
+                            image={topObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={topObj.linkPdp}
+                            subClass="slideImageRightTop"
+                          />
+                        )
+                      )}
+                    </div>
+                    <div className="bottomImageDiv slider">
+                      {this.state.bottomArr.map((bottomObj, i) =>
+                        this.state.currentIndexTop === -1 ? (
+                          <Slide3
+                            key={i}
+                            image={bottomObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={bottomObj.linkPdp}
+                            subClass="displayNone"
+                            transSpeed={transSpeed}
+                          />
+                        ) : this.state.currentIndexTop >= i ? (
+                          this.state.currentIndexTop > i ? (
+                            this.state.currentIndexTop > i + 2 ? (
+                              <Slide3
+                                key={i}
+                                image={bottomObj.imageUrl}
+                                urlBase={hm_url_base}
+                                urlKey={bottomObj.linkPdp}
+                                subClass="displayNone"
+                                transSpeed={transSpeed}
+                              />
+                            ) : (
+                              <Slide3
+                                key={i}
+                                image={bottomObj.imageUrl}
+                                urlBase={hm_url_base}
+                                urlKey={bottomObj.linkPdp}
+                                subClass="slideImageLeftBottom"
+                                transSpeed={transSpeed}
+                              />
+                            )
+                          ) : (
+                            <Slide3
+                              key={i}
+                              image={bottomObj.imageUrl}
+                              urlBase={hm_url_base}
+                              urlKey={bottomObj.linkPdp}
+                              subClass="slideImageBottom"
+                              transSpeed={transSpeed}
+                            />
+                          )
+                        ) : this.state.currentIndexTop < i - 2 ? (
+                          <Slide3
+                            key={i}
+                            image={bottomObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={bottomObj.linkPdp}
+                            subClass="displayNone"
+                          />
+                        ) : (
+                          <Slide3
+                            key={i}
+                            image={bottomObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={bottomObj.linkPdp}
+                            subClass="slideImageRightBottom"
+                          />
+                        )
+                      )}
+                    </div>
+                    <div className="shoes slider">
+                      {this.state.shoeArr.map((shoeObj, i) =>
+                        this.state.currentIndexTop === -1 ? (
+                          <Slide4
+                            key={i}
+                            image={shoeObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={shoeObj.linkPdp}
+                            subClass="displayNone"
+                            transSpeed={transSpeed}
+                          />
+                        ) : this.state.currentIndexTop >= i ? (
+                          this.state.currentIndexTop > i ? (
+                            this.state.currentIndexTop > i + 2 ? (
+                              <Slide4
+                                key={i}
+                                image={shoeObj.imageUrl}
+                                urlBase={hm_url_base}
+                                urlKey={shoeObj.linkPdp}
+                                subClass="displayNone"
+                                transSpeed={transSpeed}
+                              />
+                            ) : (
+                              <Slide4
+                                key={i}
+                                image={shoeObj.imageUrl}
+                                urlBase={hm_url_base}
+                                urlKey={shoeObj.linkPdp}
+                                subClass="slideImageLeftShoe"
+                                transSpeed={transSpeed}
+                              />
+                            )
+                          ) : (
+                            <Slide4
+                              key={i}
+                              image={shoeObj.imageUrl}
+                              urlBase={hm_url_base}
+                              urlKey={shoeObj.linkPdp}
+                              subClass="slideImageShoe"
+                              transSpeed={transSpeed}
+                            />
+                          )
+                        ) : this.state.currentIndexTop < i - 2 ? (
+                          <Slide4
+                            key={i}
+                            image={shoeObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={shoeObj.linkPdp}
+                            subClass="displayNone"
+                          />
+                        ) : (
+                          <Slide4
+                            key={i}
+                            image={shoeObj.imageUrl}
+                            urlBase={hm_url_base}
+                            urlKey={shoeObj.linkPdp}
+                            subClass="slideImageRightShoe"
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
 
-              <div className="topImageDiv slider">
-                {this.state.topArr.map((topObj, i) =>
-                  this.state.currentIndexTop === -1 ? (
-                    <Slide3
-                      key={i}
-                      image={topObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={topObj.linkPdp}
-                      subClass="displayNone"
-                      transSpeed={transSpeed}
-                    />
-                  ) : this.state.currentIndexTop >= i ? (
-                    this.state.currentIndexTop > i ? (
-                      this.state.currentIndexTop > i + 2 ? (
-                        <Slide3
-                          key={i}
-                          image={topObj.imageUrl}
-                          urlBase={hm_url_base}
-                          urlKey={topObj.linkPdp}
-                          subClass="displayNone"
-                          transSpeed={transSpeed}
-                        />
-                      ) : (
-                        <Slide3
-                          key={i}
-                          image={topObj.imageUrl}
-                          urlBase={hm_url_base}
-                          urlKey={topObj.linkPdp}
-                          subClass="slideImageLeftTop"
-                          transSpeed={transSpeed}
-                        />
-                      )
-                    ) : (
-                      <Slide3
-                        key={i}
-                        image={topObj.imageUrl}
-                        urlBase={hm_url_base}
-                        urlKey={topObj.linkPdp}
-                        subClass="slideImageTop"
-                        transSpeed={transSpeed}
-                      />
-                    )
-                  ) : this.state.currentIndexTop < i - 2 ? (
-                    <Slide3
-                      key={i}
-                      image={topObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={topObj.linkPdp}
-                      subClass="displayNone"
+                  <button onClick={this.goToNextSlide}> {"<="} </button>
+                  {this.state.shuffle ? (
+                    <img
+                      className="shuffleButton"
+                      style={{ width: "150px" }}
+                      src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575828503/button_blue_jxy00w.png"
+                      alt=""
                     />
                   ) : (
-                    <Slide3
-                      key={i}
-                      image={topObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={topObj.linkPdp}
-                      subClass="slideImageRightTop"
+                    <img
+                      onClick={this.shuffle}
+                      className="shuffleButton"
+                      style={{ width: "150px" }}
+                      src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575801773/button_red_oskdvl.png"
+                      alt=""
                     />
-                  )
-                )}
-              </div>
-              <div className="bottomImageDiv slider">
-                {this.state.bottomArr.map((bottomObj, i) =>
-                  this.state.currentIndexTop === -1 ? (
-                    <Slide3
-                      key={i}
-                      image={bottomObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={bottomObj.linkPdp}
-                      subClass="displayNone"
-                      transSpeed={transSpeed}
-                    />
-                  ) : this.state.currentIndexTop >= i ? (
-                    this.state.currentIndexTop > i ? (
-                      this.state.currentIndexTop > i + 2 ? (
-                        <Slide3
-                          key={i}
-                          image={bottomObj.imageUrl}
-                          urlBase={hm_url_base}
-                          urlKey={bottomObj.linkPdp}
-                          subClass="displayNone"
-                          transSpeed={transSpeed}
-                        />
-                      ) : (
-                        <Slide3
-                          key={i}
-                          image={bottomObj.imageUrl}
-                          urlBase={hm_url_base}
-                          urlKey={bottomObj.linkPdp}
-                          subClass="slideImageLeftBottom"
-                          transSpeed={transSpeed}
-                        />
-                      )
-                    ) : (
-                      <Slide3
-                        key={i}
-                        image={bottomObj.imageUrl}
-                        urlBase={hm_url_base}
-                        urlKey={bottomObj.linkPdp}
-                        subClass="slideImageBottom"
-                        transSpeed={transSpeed}
-                      />
-                    )
-                  ) : this.state.currentIndexTop < i - 2 ? (
-                    <Slide3
-                      key={i}
-                      image={bottomObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={bottomObj.linkPdp}
-                      subClass="displayNone"
-                    />
-                  ) : (
-                    <Slide3
-                      key={i}
-                      image={bottomObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={bottomObj.linkPdp}
-                      subClass="slideImageRightBottom"
-                    />
-                  )
-                )}
-              </div>
-              <div className="shoes slider">
-                {this.state.shoeArr.map((shoeObj, i) =>
-                  this.state.currentIndexTop === -1 ? (
-                    <Slide4
-                      key={i}
-                      image={shoeObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={shoeObj.linkPdp}
-                      subClass="displayNone"
-                      transSpeed={transSpeed}
-                    />
-                  ) : this.state.currentIndexTop >= i ? (
-                    this.state.currentIndexTop > i ? (
-                      this.state.currentIndexTop > i + 2 ? (
-                        <Slide4
-                          key={i}
-                          image={shoeObj.imageUrl}
-                          urlBase={hm_url_base}
-                          urlKey={shoeObj.linkPdp}
-                          subClass="displayNone"
-                          transSpeed={transSpeed}
-                        />
-                      ) : (
-                        <Slide4
-                          key={i}
-                          image={shoeObj.imageUrl}
-                          urlBase={hm_url_base}
-                          urlKey={shoeObj.linkPdp}
-                          subClass="slideImageLeftShoe"
-                          transSpeed={transSpeed}
-                        />
-                      )
-                    ) : (
-                      <Slide4
-                        key={i}
-                        image={shoeObj.imageUrl}
-                        urlBase={hm_url_base}
-                        urlKey={shoeObj.linkPdp}
-                        subClass="slideImageShoe"
-                        transSpeed={transSpeed}
-                      />
-                    )
-                  ) : this.state.currentIndexTop < i - 2 ? (
-                    <Slide4
-                      key={i}
-                      image={shoeObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={shoeObj.linkPdp}
-                      subClass="displayNone"
-                    />
-                  ) : (
-                    <Slide4
-                      key={i}
-                      image={shoeObj.imageUrl}
-                      urlBase={hm_url_base}
-                      urlKey={shoeObj.linkPdp}
-                      subClass="slideImageRightShoe"
-                    />
-                  )
-                )}
-              </div>
-            </div>
-            <br/>
-            <button
-              onClick={this.goToNextSlide}
-            >
-              {" "}
-              {"<<<<<"}{" "}
-            </button>
-            <button onClick={this.shuffle}> Shuffle </button>
-            <button onClick={this.goToPrevSlide}> {">>>>>"} </button>
-            
-          </div>
-        ) : (
-          <div>"SOME SPINNER"</div>
-        )}
-        {/* <button onClick={this.deleteTopId}> delete TOP ID </button>
+                  )}
+                  <button onClick={this.goToPrevSlide}> {"=>"} </button>
+                </div>
+              ) : (
+                <div>
+                  <div className="backgroundSilouetteLoading"></div>
+                </div>
+              )}
+              {/* <button onClick={this.deleteTopId}> delete TOP ID </button>
         <button onClick={this.deleteBottomId}> delete BOTTOM ID </button>
         <button onClick={this.deleteShoeId}> Delete SHOE ID </button> */}
 
-        {/* <UploadPhoto
-          user={this.props.user}
-          updateUserImage={this.props.updateUserImage}
-        ></UploadPhoto> */}
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
+            </div>
+            <div>
+              {this.state.favorite ? (
+                <img
+                  className="favoriteIconTrans"
+                  style={{
+                    width: "35px",
+                    height: "35px",
+                    marginTop: "20px",
+                    marginLeft: "20px"
+                  }}
+                  onClick={this.onClickFavoriteHandler}
+                  src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575817229/heart_full_jznpod.png"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="favoriteIcon"
+                  onClick={this.onClickFavoriteHandler}
+                  style={{
+                    width: "35px",
+                    height: "35px",
+                    marginTop: "20px",
+                    marginLeft: "20px"
+                  }}
+                  src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575817229/heart_empty_r1gseu.png"
+                  alt=""
+                />
+              )}
+            </div>
+          </div>
+        ) : (
+          <UploadPhoto
+            user={this.props.user}
+            updateUserImage={this.props.updateUserImage}
+            toggle={this.togglePhoto}
+          ></UploadPhoto>
+           
+        )}
         {/* <CameraMobile></CameraMobile> */}
       </div>
+      
     );
   }
 }

@@ -28,10 +28,17 @@
   color: red;
   align-items: center;
   text-align: center;
+  background-image: linear-gradient(#fff5fa, #e3faff);
+  
 }
 
 .right{
   margin-left: auto;
+}
+
+.flex{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .left{
@@ -40,7 +47,8 @@
 
 .dmulogo{
   height: 50px;
-  margin: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .menuicon{
@@ -57,7 +65,7 @@
 
 .backgroundSilouette {
   border: 2px dotted grey;
-  filter: drop-shadow(0 0 0.5rem crimson);
+  /* filter: drop-shadow(0 0 0.5rem crimson); */
   border-radius: 45px;
   background:#ffffdc;
   /* background-image: linear-gradient(red, yellow, blue); */
@@ -72,21 +80,51 @@
   align-items: center;
   flex-direction: column;
   z-index: 0;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function:ease;
 }
 
-/* .backgroundSilouette50 {
-  height: 550px;
+.backgroundSilouetteLoading {
+  border: 2px dotted grey;
+  /* filter: drop-shadow(0 0 0.5rem crimson); */
+  border-radius: 45px;
+  background:#ffffdc;
+  /* background-image: linear-gradient(red, yellow, blue); */
+  padding: 20px;
+  height: 531px;
   width: 229px;
-  background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
-  opacity: 50%;
+  background-position-y: 20px;
+  background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1575801351/Unbenannt5_ez291q.gif");
   background-size: contain;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
   flex-direction: column;
   z-index: 0;
-} */
+}
 
+.favoriteIcon{
+  /* position: absolute;
+  right: 25px;
+  top: 25px; */
+  filter: drop-shadow(0 0 0rem crimson);
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function:ease;
+
+}
+
+.favoriteIconTrans{
+  filter: drop-shadow(0 0 0.75rem crimson);
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function:ease;
+}
+.shuffleButton{
+  /* position: absolute;
+  right: 0; */
+}
 
 .face {
   z-index: 3;
@@ -168,8 +206,8 @@
 }
 
 .photo{
-  width: 300px;
-  height: auto;
+  width: 400px;
+  height: 800px;
   position: relative;
   /* display: flex; */
 }
@@ -195,6 +233,8 @@
 #container-circles{
   z-index: 3;
 }
+
+
 
 /* .cameraViewfinder{
   width: 200px;

@@ -53,11 +53,10 @@ class App extends React.Component {
       <div>
         <div className="all">
         <Link to={`/`}>
+        
         <img className="left dmulogo" src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575754803/dmulogo_saeiru.png" alt=""/>
         </Link>
-          <div className="right">
-            <NavbarRS></NavbarRS>
-          </div>
+
           
             
           
@@ -65,14 +64,18 @@ class App extends React.Component {
 
           </Navbar> */}
 
-          <div className="break"></div>
-          <h6>
+
+
+          <div className="right flex">
+          <div style={{margin: "10px"}}>
             Hello{" "}
             {this.state.loggedInUser
               ? this.state.loggedInUser.username
               : "Stranger"}{" "}
             !
-          </h6>
+          </div>
+            <NavbarRS logouthandler={this.logouthandler}></NavbarRS>
+          </div>
           <br />
 
           <div className="break"></div>
