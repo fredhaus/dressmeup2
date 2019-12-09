@@ -25,7 +25,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  color: red;
+  /* color: red; */
   align-items: center;
   text-align: center;
   background-image: linear-gradient(#fff5fa, #e3faff);
@@ -36,7 +36,23 @@
   margin-left: auto;
 }
 
+.flexClothes{
+  display: flex;
+  flex-wrap: wrap;
+  width: 329px;
+}
+
 .flex{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.leftSide{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rightSide{
   display: flex;
   flex-wrap: wrap;
 }
@@ -206,10 +222,16 @@
 }
 
 .photo{
-  width: 400px;
-  height: 800px;
+  width: 300px;
+  height: 260px;
   position: relative;
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  margin: 20px;  
+}
+
+#Snackbar{
+  opacity: 0.5;
 }
 
 .photoMaskOverlay{
@@ -219,27 +241,57 @@
 
 .photoCamera{
   position: absolute;
+  width: 200px;
 }
 
 .photoMaskOverlayImage{
   position: absolute;
-  width: 100%;
-  height: auto;
+  width: 300px;
+  border-radius: 45px;
+  ; filter: drop-shadow(0 0 0.5rem crimson);
   z-index: 2;
   top: 0;
   left: 0
+}
+
+.photoMaskOverlayImage_after{
+  position: absolute;
+  width: 300px;
+  border-radius: 45px;
+  ; filter: drop-shadow(0 0 0.5rem blue);
+  z-index: 2;
+  top: 0;
+  left: 0;
+  transition-property: all;
+  transition-duration: 0.2s;
+  /* transition-timing-function:ease; */
+}
+
+.photoIconsDiv{
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.photoIcon{
+  transform: rotateY(0deg);
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function:ease;
+  
+}
+
+.photoIconHidden{
+  transform: rotateY(90deg);
+  transition-property: all;
+  transition-duration: 1s;
+  transition-timing-function:ease;
 }
 
 #container-circles{
   z-index: 3;
 }
 
-
-
-/* .cameraViewfinder{
-  width: 200px;
-  height: auto;
-} */
 
 .slider{
   position: relative;

@@ -3,7 +3,7 @@ import { Link, Redirect, Switch, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar"
 import device from "current-device"; //{console.log('device.mobile() === %s', device.mobile())} ==> True // False
 import "typeface-roboto";
-
+import SnackbarM from "./components/Snackbar_mui"
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -14,6 +14,7 @@ import Feed from "./components/Feed";
 import Navbar from "./components/Navbar";
 import RandomClothes2 from "./components/RandomClothes_copy";
 import NavbarRS from "./components/NavbarRS";
+import { Snackbar } from "@material-ui/core";
 
 // const [collapsed, setCollapsed] = useState(true);
 
@@ -21,16 +22,18 @@ import NavbarRS from "./components/NavbarRS";
 
 class App extends React.Component {
   state = {
-    loggedInUser: this.props.user
+    loggedInUser: this.props.user,
+    snackbar: false
   };
 
   updateUserImage = image => {
     let copy = { ...this.state.user };
     copy.headPic = image;
-
-    this.setState({
-      loggedInUser: copy
-    });
+    
+    this.setState(prevState => ({
+      loggedInUser: copy,
+      snackbar: true
+    }));
   };
 
   updateUserHandler = userObj => {
@@ -56,7 +59,7 @@ class App extends React.Component {
         
         <img className="left dmulogo" src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575754803/dmulogo_saeiru.png" alt=""/>
         </Link>
-
+        {this.state.snackbar?<SnackbarM/> : ""}
           
             
           

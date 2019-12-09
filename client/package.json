@@ -12,6 +12,7 @@
     "cloudinary-core": "^2.8.0",
     "current-device": "^0.10.0",
     "lodash": "^4.17.15",
+    "notistack": "^0.9.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-html5-camera-photo": "^1.5.2",

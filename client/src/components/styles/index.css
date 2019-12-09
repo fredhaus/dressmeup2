@@ -1,23 +1,24 @@
 #container-circles{position:absolute;left:50%;bottom:90px}
-#outer-circle{left: -26px;
-  height: 47px;
-  width: 47px;
-  background-color: hsla(0,0%,100%,.4);
+#outer-circle{left: 33px;
+  height: 35px;
+  width: 35px;
+  background-color: crimson;
+  opacity: 0.7;
   z-index: 1;
-  top: 29px;}
+  top: 33px;}
 #inner-circle,#outer-circle{position:absolute;border-radius:50%}
-#inner-circle{left: 50%;
-  top: 5px;
-  height: 22px;
-  width: 22px;
+#inner-circle{    left: 19px;
+  top: 2px;
+  height: 16px;
+  width: 16px;
   background: #fff;
   margin: 8px 0 0 -10px;
   z-index: 2;}
-#inner-circle.is-clicked{height:38px;width:38px;margin:-19px 0 0 -19px}
-#white-flash.normal{position:absolute;height:100%;width:100%;opacity:1;-webkit-transition:opacity .9s ease-out;-o-transition:opacity .9s ease-out;transition:opacity .9s ease-out}
+#inner-circle.is-clicked{height:16px;width:16px;margin:8px 0 0 -10px}
+#white-flash.normal{position:absolute;height:230px;width:300px;opacity:1;-webkit-transition:opacity .9s ease-out;-o-transition:opacity .9s ease-out;transition:opacity .9s ease-out}
 #white-flash.do-transition{opacity:0;background:#fff}
-#display-error{color:#000;background-color:#fff}.react-html5-camera-photo{position:relative;text-align:center}.react-html5-camera-photo>img,.react-html5-camera-photo>video{width:768px}.react-html5-camera-photo>.display-error{width:768px;margin:0 auto}
-@media(max-width:768px){.react-html5-camera-photo>.display-error,.react-html5-camera-photo>img,.react-html5-camera-photo>video{width:100%}}.react-html5-camera-photo-fullscreen>img,.react-html5-camera-photo-fullscreen>video{width:100vw;height:100vh}.react-html5-camera-photo-fullscreen>video{-o-object-fit:fill;object-fit:fill}.react-html5-camera-photo-fullscreen>.display-error{width:100vw;height:100vh}
+#display-error{color:#000;background-color:#fff}.react-html5-camera-photo{position:relative;text-align:center}.react-html5-camera-photo>img,.react-html5-camera-photo>video{width:300px;border-radius: 45px;}.react-html5-camera-photo>.display-error{width:300px;margin:0 auto}
+@media(max-width:300px){.react-html5-camera-photo>.display-error,.react-html5-camera-photo>img,.react-html5-camera-photo>video{width:300px; filter: drop-shadow(0 0 0.5rem blue);}}.react-html5-camera-photo-fullscreen>img,.react-html5-camera-photo-fullscreen>video{width:300px;height:100vh}.react-html5-camera-photo-fullscreen>video{-o-object-fit:fill;object-fit:fill ; filter: drop-shadow(0 0 0.5rem blue);}.react-html5-camera-photo-fullscreen>.display-error{width:300px;height:100vh}
 /*# sourceMappingURL=index.css.map*/
 
 

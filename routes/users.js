@@ -32,16 +32,17 @@ router.post("/imageupload", function(req, res, next) {
     console.log("result :", result);
     
     let imageUrl = result.url.replace('upload', 'upload' + cloudinaryPreset)
+    res.status(200).json(imageUrl);
 
-    User.findByIdAndUpdate(req.user._id, {headPic: imageUrl} ).then(foundUser => {
-        console.log(foundUser)
-        res.status(200).json(imageUrl);
+    try{
+    User.findByIdAndUpdate(req.user._id, {headPic: imageUrl})
+    }
+    catch(error) {
+      console.error(error)
+    }
+  })
 
-      })
-
-  });
-
-});
+})
 
 module.exports = router;
 

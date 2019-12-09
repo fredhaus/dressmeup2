@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-document.getElementById('root').innerText = 'The React app has not connected to the backend yet.'
+document.getElementById('root').innerText = 'Charging Up ...'
 
 // makes sure the entire App only gets rendered AFTER we know if the user is logged in
 axios.get('/api/auth/checkuser').then(res => {
