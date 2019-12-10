@@ -24,4 +24,15 @@ axios.get('/api/auth/checkuser').then(res => {
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
+
+
+
+  // ReactDOM.render(
+  //   <BrowserRouter>
+  //     {/* <App user={res.data.userDoc} /> */}
+  //     <App/>
+  //   </BrowserRouter>
+  //   , document.getElementById('root'));
+
+
 serviceWorker.unregister();

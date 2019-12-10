@@ -3,7 +3,7 @@ import { Link, Redirect, Switch, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar"
 import device from "current-device"; //{console.log('device.mobile() === %s', device.mobile())} ==> True // False
 import "typeface-roboto";
-import SnackbarM from "./components/Snackbar_mui"
+import SnackbarM from "./components/Snackbar_mui";
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -23,16 +23,33 @@ import { Snackbar } from "@material-ui/core";
 class App extends React.Component {
   state = {
     loggedInUser: this.props.user,
-    snackbar: false
+    snackbar: false,
+    mute: false
+  };
+
+  consoleLog = () => {
+    console.log(this.state.mute)
+  }
+  
+  toggleMute = () => {
+    this.setState(prevState => ({
+      mute: !prevState.mute
+      
+    }));
+  };
+
+  toggleSnackbar = () => {
+    this.setState({
+      snackbar: true
+    });
   };
 
   updateUserImage = image => {
     let copy = { ...this.state.user };
     copy.headPic = image;
-    
+
     this.setState(prevState => ({
-      loggedInUser: copy,
-      snackbar: true
+      loggedInUser: copy
     }));
   };
 
@@ -46,7 +63,7 @@ class App extends React.Component {
   logouthandler = () => {
     axios.get("/api/auth/logout").then(response => {
       this.setState({
-        loggedInUser: ""
+        loggedInUser: null
       });
     });
   };
@@ -55,28 +72,43 @@ class App extends React.Component {
     return (
       <div>
         <div className="all">
-        <Link to={`/`}>
-        
-        <img className="left dmulogo" src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575754803/dmulogo_saeiru.png" alt=""/>
-        </Link>
-        {this.state.snackbar?<SnackbarM/> : ""}
+          <Link to={`/`}>
+            <img
+              className="left dmulogo"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575754803/dmulogo_saeiru.png"
+              alt=""
+            />
+          </Link>
+          {!this.state.mute ? (
+            <button onClick={this.toggleMute}>Mute</button>
+          ) : (
+            <button onClick={this.toggleMute}>UnMute</button>
+          )}
           
-            
-          
+          {this.state.snackbar ? (
+            <SnackbarM
+              onClose={() => {
+                this.setState({
+                  snackbar: false
+                });
+              }}
+            />
+          ) : (
+            ""
+          )}
+
           {/* <Navbar logouthandler={this.logouthandler} user={this.state.loggedInUser}>
 
           </Navbar> */}
 
-
-
           <div className="right flex">
-          <div style={{margin: "10px"}}>
-            Hello{" "}
-            {this.state.loggedInUser
-              ? this.state.loggedInUser.username
-              : "Stranger"}{" "}
-            !
-          </div>
+            <div style={{ margin: "10px" }}>
+              Hello{" "}
+              {this.state.loggedInUser
+                ? this.state.loggedInUser.username
+                : "Stranger"}{" "}
+              !
+            </div>
             <NavbarRS logouthandler={this.logouthandler}></NavbarRS>
           </div>
           <br />
@@ -90,6 +122,8 @@ class App extends React.Component {
                 <div>
                   {/* <RandomClothes user={this.state.loggedInUser} updateUserImage={this.updateUserImage}></RandomClothes> */}
                   <RandomClothes2
+                    mute={this.state.mute}
+                    toggleSnackbar={this.toggleSnackbar}
                     user={this.state.loggedInUser}
                     updateUserImage={this.updateUserImage}
                   ></RandomClothes2>

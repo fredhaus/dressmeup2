@@ -10,6 +10,7 @@ import CameraMobile from "./CameraMobile";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import FavoriteBorderTwoToneIcon from "@material-ui/icons/FavoriteBorderTwoTone";
 import AddAPhotoTwoToneIcon from "@material-ui/icons/AddAPhotoTwoTone";
+import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 
 let colors = [
   "crimson",
@@ -47,10 +48,32 @@ class AddProject extends React.Component {
     deleteIDs: [],
     shuffle: false,
     photo: false,
-    snackbar: false
+    snackbar: false,
+    mute: this.props.mute
   };
 
+  audio_shuffle = new Audio(
+    "https://res.cloudinary.com/dok2ttvhu/video/upload/v1576013071/shuffle_2_lucwoz.mp3"
+  );
+  audio_swipe = new Audio(
+    "https://res.cloudinary.com/dok2ttvhu/video/upload/v1576014303/swoosh_short_edf6zu.mp3"
+  );
+
+  audio_swoosh = new Audio(
+    "https://res.cloudinary.com/dok2ttvhu/video/upload/v1576014809/swoosh_2_ixxbxn.mp3"
+  );
+
+  audio_favorite = new Audio(
+    "https://res.cloudinary.com/dok2ttvhu/video/upload/v1576017226/favortie2_ekh8hz.mp3"
+  );
+
+
   shuffle = async () => {
+    console.log(this.state)
+    if (!this.props.mute) {
+      this.audio_shuffle.play();
+    }
+
     this.setState(prevState => ({
       shuffle: !prevState.shuffle
     }));
@@ -85,6 +108,9 @@ class AddProject extends React.Component {
   };
 
   goToNextSlide = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     if (this.state.currentIndexTop === this.state.topArr.length - 50) {
       this.fillTopArryay();
     }
@@ -93,7 +119,6 @@ class AddProject extends React.Component {
         currentIndexTop: 0
       });
     }
-
 
     if (this.state.currentIndexBottom === this.state.bottomArr.length - 40) {
       this.fillBottomArryay();
@@ -125,15 +150,17 @@ class AddProject extends React.Component {
   };
 
   goToPrevSlide = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     this.setState(prevState => ({
       currentIndexTop: prevState.currentIndexTop - 1,
       currentIndexBottom: prevState.currentIndexBottom - 1,
       currentIndexShoe: prevState.currentIndexShoe - 1
     }));
-    console.log("TOP", this.state.currentIndexTop);
-    console.log("BOTTOM", this.state.currentIndexBottom);
-    console.log("SHOE", this.state.currentIndexShoe);
   };
+
+  //////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES
 
   fillTopArryay = () => {
     axios
@@ -183,6 +210,12 @@ class AddProject extends React.Component {
 
   onClickFavoriteHandler = () => {
     try {
+      if(!this.state.favorite){
+        if (!this.props.mute) {
+          this.audio_favorite.play();
+        }
+        
+      }
       this.setState(prevState => ({
         favorite: !prevState.favorite
       }));
@@ -206,34 +239,37 @@ class AddProject extends React.Component {
     console.log(this.state);
   };
 
-  deleteBottomId = () => {
-    let id = this.state.bottomArr[this.state.currentIndexBottom]._id;
-    console.log(id);
-    axios.get(`/api/garments/delete?id=${id}`).then(response => {
-      console.log(response);
-      console.log(id, " has been deleted");
-    });
-  };
+  // deleteBottomId = () => {
+  //   let id = this.state.bottomArr[this.state.currentIndexBottom]._id;
+  //   console.log(id);
+  //   axios.get(`/api/garments/delete?id=${id}`).then(response => {
+  //     console.log(response);
+  //     console.log(id, " has been deleted");
+  //   });
+  // };
 
-  deleteShoeId = () => {
-    let id = this.state.shoeArr[this.state.currentIndexShoe]._id;
-    console.log(id);
-    axios.get(`/api/garments/delete?id=${id}`).then(response => {
-      console.log(response);
-      console.log(id, " has been deleted");
-    });
-  };
+  // deleteShoeId = () => {
+  //   let id = this.state.shoeArr[this.state.currentIndexShoe]._id;
+  //   console.log(id);
+  //   axios.get(`/api/garments/delete?id=${id}`).then(response => {
+  //     console.log(response);
+  //     console.log(id, " has been deleted");
+  //   });
+  // };
 
-  deleteTopId = () => {
-    let id = this.state.topArr[this.state.currentIndexTop]._id;
-    console.log(id);
-    axios.get(`/api/garments/delete?id=${id}`).then(response => {
-      console.log(response);
-      console.log(id, " has been deleted");
-    });
-  };
+  // deleteTopId = () => {
+  //   let id = this.state.topArr[this.state.currentIndexTop]._id;
+  //   console.log(id);
+  //   axios.get(`/api/garments/delete?id=${id}`).then(response => {
+  //     console.log(response);
+  //     console.log(id, " has been deleted");
+  //   });
+  // };
 
   togglePhoto = () => {
+    if (!this.props.mute) {
+      this.audio_swoosh.play();
+    }
     this.setState(prevState => ({
       photo: !prevState.photo
     }));
@@ -246,6 +282,9 @@ class AddProject extends React.Component {
   };
 
   topPlus = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     if (this.state.currentIndexTop === this.state.topArr.length - 50) {
       this.fillTopArryay();
     }
@@ -260,6 +299,9 @@ class AddProject extends React.Component {
   };
 
   bottomPlus = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     if (this.state.currentIndexBottom === this.state.bottomArr.length - 40) {
       this.fillBottomArryay();
     }
@@ -274,6 +316,9 @@ class AddProject extends React.Component {
   };
 
   shoePlus = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     if (this.state.currentIndexShoe === this.state.shoeArr.length - 30) {
       this.fillShoeArryay();
     }
@@ -288,6 +333,9 @@ class AddProject extends React.Component {
   };
 
   topMinus = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     if (this.state.currentIndexTop < 0) {
       this.setState({
         currentIndexTop: this.state.topArr.length - 1
@@ -299,6 +347,9 @@ class AddProject extends React.Component {
   };
 
   bottomMinus = () => {
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
     if (this.state.currentIndexBottom < 0) {
       this.setState({
         currentIndexBottom: this.state.bottomArr.length - 1
@@ -310,7 +361,10 @@ class AddProject extends React.Component {
   };
 
   shoeMinus = () => {
-    console.log(this.state.currentIndexShoe)
+    if (!this.props.mute && !this.state.shuffle) {
+      this.audio_swipe.play();
+    }
+    console.log(this.state.currentIndexShoe);
     if (this.state.currentIndexShoe < 0) {
       this.setState({
         currentIndexShoe: this.state.shoeArr.length - 1
@@ -323,12 +377,14 @@ class AddProject extends React.Component {
 
   render() {
     return (
-      <div style={{ height: "800px" }}>
+      <div className="master" style={{ height: "800px" }}>
+        
         {/* <Snackbar id="Snackbar"></Snackbar> */}
         {this.state.photo ? (
           <UploadPhoto
-            snackbarHandleClick={this.snackbarHandleClick}
+            // snackbarHandleClick={this.snackbarHandleClick}
             user={this.props.user}
+            toggleSnackbar={this.props.toggleSnackbar}
             updateUserImage={this.props.updateUserImage}
             toggle={this.togglePhoto}
           ></UploadPhoto>
@@ -346,42 +402,42 @@ class AddProject extends React.Component {
                 marginRight: "20px"
               }}
             />
-            <button
-            onClick={this.topPlus}
+            <img
+              class="arrowDS"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
+              onClick={this.topPlus}
+              alt=""
               style={{
                 zIndex: "3",
-                width: "50px",
-                height: "50px"
-                // marginTop: "20px",
-                // marginRight: "20px",
+                width: "25px",
+                height: "52px",
+                marginRight: "20px"
               }}
-            >
-              {"<"}
-            </button>
-            <button
-            onClick={this.bottomPlus}
+            />
+            <img
+              class="arrowDS"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
+              onClick={this.bottomPlus}
+              alt=""
               style={{
                 zIndex: "3",
-                width: "50px",
-                height: "50px"
-                // marginTop: "20px",
-                // marginRight: "20px",
+                width: "25px",
+                height: "52px",
+                marginRight: "20px"
               }}
-            >
-              {"<"}
-            </button>
-            <button
+            />
+            <img
+              class="arrowDS"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
               onClick={this.shoePlus}
+              alt=""
               style={{
                 zIndex: "3",
-                width: "50px",
-                height: "50px"
-                // marginTop: "20px",
-                // marginRight: "20px",
+                width: "25px",
+                height: "52px",
+                marginRight: "20px"
               }}
-            >
-              {"<"}
-            </button>
+            />
           </div>
 
           <div className="randomClothes">
@@ -590,25 +646,6 @@ class AddProject extends React.Component {
                     )}
                   </div>
                 </div>
-
-                <button onClick={this.goToNextSlide}> {"<="} </button>
-                {this.state.shuffle ? (
-                  <img
-                    className="shuffleButton"
-                    style={{ width: "150px" }}
-                    src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575828503/button_blue_jxy00w.png"
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    onClick={this.shuffle}
-                    className="shuffleButton"
-                    style={{ width: "150px" }}
-                    src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575801773/button_red_oskdvl.png"
-                    alt=""
-                  />
-                )}
-                <button onClick={this.goToPrevSlide}> {"=>"} </button>
               </div>
             ) : (
               <div>
@@ -621,71 +658,146 @@ class AddProject extends React.Component {
           </div>
           <div className="rightSide" style={{ width: "50px", height: "531px" }}>
             {this.state.favorite ? (
-              <img
+              <FavoriteTwoToneIcon
                 className="favoriteIconTrans"
                 style={{
                   width: "35px",
                   height: "35px",
                   marginTop: "20px",
-                  marginLeft: "20px"
+                  marginLeft: "10px",
+                  transitionProperty: "all",
+                  transitionDuration: "0.2s",
+                  transitionTimingFunction: "ease",
+                  color: "crimson",
+                  filter: "drop-shadow(0 0 0.75rem crimson)"
                 }}
                 onClick={this.onClickFavoriteHandler}
-                src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575817229/heart_full_jznpod.png"
-                alt=""
               />
             ) : (
-              <img
+              <FavoriteTwoToneIcon
                 className="favoriteIcon"
-                onClick={this.onClickFavoriteHandler}
                 style={{
+                  filter: "drop-shadow(0 0 0rem white)",
                   width: "35px",
                   height: "35px",
                   marginTop: "20px",
-                  marginLeft: "20px"
+                  marginLeft: "10px",
+                  transitionProperty: "all",
+                  transitionDuration: "0.2s",
+                  transitionTimingFunction: "ease"
                 }}
-                src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575817229/heart_empty_r1gseu.png"
-                alt=""
+                onClick={this.onClickFavoriteHandler}
               />
             )}
-            <button
+            <img
+              class="arrowDS"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
               onClick={this.topMinus}
+              alt=""
               style={{
                 zIndex: "3",
-                width: "50px",
-                height: "50px"
-                // marginTop: "20px",
+                width: "25px",
+                height: "52px",
+                marginLeft: "20px"
                 // marginRight: "20px",
               }}
-            >
-              {">"}
-            </button>
-            <button
-            onClick={this.bottomMinus}
+            ></img>
+            <img
+              class="arrowDS"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
+              alt=""
+              onClick={this.bottomMinus}
               style={{
                 zIndex: "3",
-                width: "50px",
-                height: "50px"
-                // marginTop: "20px",
+                width: "25px",
+                height: "52px",
+                marginLeft: "20px"
                 // marginRight: "20px",
               }}
-            >
-              {">"}
-            </button>
-            <button
-            onClick={this.shoeMinus}
+            ></img>
+            <img
+              alt=""
+              class="arrowDS"
+              // src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
+              onClick={this.shoeMinus}
               style={{
                 zIndex: "3",
-                width: "50px",
-                height: "50px"
-                // marginTop: "20px",
+                width: "25px",
+                height: "52px",
+                marginLeft: "20px"
                 // marginRight: "20px",
               }}
-            >
-              {">"}
-            </button>
+            ></img>
           </div>
         </div>
+        <div className="shuffleButtonsAll">
+          <div onClick={this.goToNextSlide}>
+            <img
+              class="arrowDSBottom"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
+              onClick={this.goToNextSlide}
+              alt=""
+              style={{
+                zIndex: "3",
+                width: "12px",
+                height: "25px"
+              }}
+            ></img>
+            <img
+              class="arrowDSBottom"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
+              onClick={this.goToNextSlide}
+              alt=""
+              style={{
+                zIndex: "3",
+                width: "12px",
+                height: "25px"
+              }}
+            ></img>
+          </div>
 
+          {this.state.shuffle ? (
+            <img
+              className="shuffleButton"
+              style={{ width: "150px" }}
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575828503/button_blue_jxy00w.png"
+              alt=""
+            />
+          ) : (
+            <img
+              onClick={this.shuffle}
+              className="shuffleButton"
+              style={{ width: "150px" }}
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575801773/button_red_oskdvl.png"
+              alt=""
+            />
+          )}
+          <div onClick={this.goToPrevSlide}>
+            <img
+              class="arrowDSBottom"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
+              onClick={this.goToPrevSlide}
+              alt=""
+              style={{
+                zIndex: "3",
+                width: "12px",
+                height: "25px"
+              }}
+            ></img>
+            <img
+              class="arrowDSBottom"
+              src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
+              onClick={this.goToPrevSlide}
+              alt=""
+              style={{
+                zIndex: "3",
+                width: "12px",
+                height: "25px"
+              }}
+            ></img>
+          </div>
+        </div>
         {/* <CameraMobile></CameraMobile> */}
       </div>
     );

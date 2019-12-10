@@ -33,7 +33,8 @@ class UploadPhoto extends Component {
 
   submitHandler() {
     this.props.toggle();
-    this.props.snackbarHandleClick()
+    this.props.toggleSnackbar()
+    // this.props.snackbarHandleClick()
     if (this.state.dataUri != null) {
       axios
         .post("/api/users/imageupload", {
@@ -85,7 +86,7 @@ class UploadPhoto extends Component {
           {this.state.dataUri ? (
             <div className="photoIconsDiv">
               <CheckCircleTwoToneIcon
-                style={{ marginLeft: "50px",height: "35px", width: "35px" ,transform: "rotateY(0deg)",
+                style={{ filter: "drop-shadow(0 0 0.25rem #b0ffb4)", marginLeft: "50px",height: "35px", width: "35px" ,transform: "rotateY(0deg)",
                 transitionProperty: "all",
                 transitionDuration: "0.5s",
                 transitionTiminFunction:"ease", marginTop:"10px", marginBottom:"10px", opacity:"1"}}
@@ -97,7 +98,7 @@ class UploadPhoto extends Component {
                 onClick={this.props.toggle}
               />
               <ReplayTwoToneIcon
-                style={{ marginRight: "50px", height: "35px", width: "35px" ,transform: "rotateY(0deg)",
+                style={{ filter: "drop-shadow(0 0 0.3rem #708fff)",  marginRight: "50px", height: "35px", width: "35px" ,transform: "rotateY(0deg)",
                 transitionProperty: "all",
                 transitionDuration: "0.5s",
                 transitionTiminFunction:"ease", marginTop:"10px", marginBottom:"10px", opacity:"1"}}
