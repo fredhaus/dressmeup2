@@ -17,6 +17,8 @@ import ExitToAppTwoToneIcon from "@material-ui/icons/ExitToAppTwoTone";
 import WbSunnyTwoToneIcon from "@material-ui/icons/WbSunnyTwoTone";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import DynamicFeedTwoToneIcon from "@material-ui/icons/DynamicFeedTwoTone";
+import EmojiPeopleTwoToneIcon from "@material-ui/icons/EmojiPeopleTwoTone";
+import StarHalfTwoToneIcon from '@material-ui/icons/StarHalfTwoTone';
 
 const styles = {
   root: {},
@@ -57,38 +59,41 @@ class TemporaryDrawer extends React.Component {
         onKeyDown={this.toggleDrawer(side, false)}
       >
         <List>
-          <Link style={{ textDecoration: "none", color: "red" }} to={`/signup`}>
+          <Link style={{ textDecoration: "none", color: "black" }} to={`/`}>
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <AccountCircleTwoToneIcon style={{ color: "red" }} />{" "}
+                <EmojiPeopleTwoToneIcon style={{ color: "darkgoldenrod" }} />
               </ListItemIcon>
-              <ListItemText primary="Log in" />
+              <ListItemText primary="Home" />
             </ListItem>
           </Link>
 
-          <Link
+          {this.props.user ? (
+            <Link style={{ textDecoration: "none", color: "black" }}>
+              <ListItem button onClick={this.props.logouthandler}>
+                <ListItemIcon>
+                  {" "}
+                  <ExitToAppTwoToneIcon />{" "}
+                </ListItemIcon>
+                <ListItemText primary="Log out" />
+              </ListItem>
+            </Link>
+          ) : (
+            <Link
             style={{ textDecoration: "none", color: "black" }}
-            to={`/signup`}
+            to={`/login`}
           >
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <WbSunnyTwoToneIcon />{" "}
+                <AccountCircleTwoToneIcon style={{ color: "#506ffa" }} />{" "}
               </ListItemIcon>
-              <ListItemText primary="Sign up" />
+              <ListItemText primary="Log in / Sign up" />
             </ListItem>
           </Link>
-
-          <Link style={{ textDecoration: "none", color: "black" }}>
-            <ListItem button onClick={this.props.logouthandler}>
-              <ListItemIcon>
-                {" "}
-                <ExitToAppTwoToneIcon />{" "}
-              </ListItemIcon>
-              <ListItemText primary="Log out" />
-            </ListItem>
-          </Link>
+            
+          )}
         </List>
         <Divider />
         <List>
@@ -99,7 +104,7 @@ class TemporaryDrawer extends React.Component {
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <FavoriteTwoToneIcon />{" "}
+                <FavoriteTwoToneIcon style={{color: "red"}}/>{" "}
               </ListItemIcon>
               <ListItemText primary="My Outfits" />
             </ListItem>
@@ -108,9 +113,18 @@ class TemporaryDrawer extends React.Component {
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <DynamicFeedTwoToneIcon />{" "}
+                <DynamicFeedTwoToneIcon style={{color: "darkblue"}}/>{" "}
               </ListItemIcon>
               <ListItemText primary="Outfit Feed" />
+            </ListItem>
+          </Link>
+          <Link style={{ textDecoration: "none", color: "black" }} to={`/about`}>
+            <ListItem button>
+              <ListItemIcon>
+                {" "}
+                <StarHalfTwoToneIcon style={{color: "blueviolet"}}/>
+              </ListItemIcon>
+              <ListItemText primary="About" />
             </ListItem>
           </Link>
         </List>
@@ -158,7 +172,10 @@ class TemporaryDrawer extends React.Component {
           />
         </Button>
 
-        <Drawer open={this.state.left} onClose={this.toggleDrawer("left", false)}>
+        <Drawer
+          open={this.state.left}
+          onClose={this.toggleDrawer("left", false)}
+        >
           {sideList("left")}
         </Drawer>
         <Drawer

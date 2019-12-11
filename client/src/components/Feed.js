@@ -36,8 +36,6 @@ class Feed extends React.Component {
   render() {
     return (
       <div className="cardwrapper">
-        All Outfits Feed:
-        <button onClick={this.onClickConsoleLog}>Console Log</button>
         {this.state.outfits.map((outfit, i) => {
           return (
             <FeedGallerySingle

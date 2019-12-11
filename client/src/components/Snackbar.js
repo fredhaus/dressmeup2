@@ -1,42 +1,28 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import { SnackbarProvider, useSnackbar } from 'notistack';
-
-function Snackbar() {
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleClick = () => {
-    enqueueSnackbar('I love snacks.');
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+ 
+class Snackbar extends React.Component {
+  createNotification = (type) => {
+    return () => {
+      switch (type) {
+        case 'info':
+          NotificationManager.info('Info message');
+          break;
+        case 'success':
+          NotificationManager.success('Success message', 'Title here');
+          break;
+        case 'warning':
+          NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+          break;
+        case 'error':
+          NotificationManager.error('Error message', 'Click me!', 5000, () => {
+            alert('callback');
+          });
+          break;
+      }
+    };
   };
-
-  const handleClickVariant = variant => () => {
-    // variant could be success, error, warning, info, or default
-    enqueueSnackbar('This is a success message!', { color: "red" });
-  };
-
-  const styles = {
-    success: { backgroundColor: 'purple' },
-  }
-
-  return (
-    <React.Fragment>
-      <Button onClick={handleClick}>Show snackbar</Button>
-      <Button onClick={handleClickVariant()}>Show success snackbar</Button>
-    </React.Fragment>
-  );
+ 
 }
-
-export default function IntegrationNotistack() {
-  return (
-    <SnackbarProvider 
-    classes={{
-      variantSuccess: {backgroundColor: "purple"}
-    }}    
-    anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-  }} maxSnack={3}>
-      <Snackbar color="red" />
-    </SnackbarProvider>
-  );
-}
+ 
+export default Snackbar;

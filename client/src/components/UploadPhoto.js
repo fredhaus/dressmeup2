@@ -33,7 +33,7 @@ class UploadPhoto extends Component {
 
   submitHandler() {
     this.props.toggle();
-    this.props.toggleSnackbar()
+    this.props.snackbar()
     // this.props.snackbarHandleClick()
     if (this.state.dataUri != null) {
       axios

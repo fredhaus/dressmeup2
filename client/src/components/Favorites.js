@@ -35,9 +35,8 @@ class Favorites extends React.Component {
 
   render() {
     return (
-      <div className="cardwrapper">
-        Favorites:
-        <button onClick={this.onClickConsoleLog}>Console Log</button>
+      <div style={{ height: "100vh" }} className="cardwrapper">
+        
         {this.state.outfits.map((outfit, i) => {
           return (
             <SingleFavoriteGallery

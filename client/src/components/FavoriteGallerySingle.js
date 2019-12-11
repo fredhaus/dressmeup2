@@ -22,41 +22,41 @@ class SingleFavoriteGallery extends React.Component {
 
   render() {
     return (
-      <div className="backgroundSilouette">
+      <div className="backgroundSilouetteResponsiveFav">
         <img
-          className="face"
-          width="90px"
+          className="faceResponsive"
+          
           src={
             this.props.user
               ? this.props.user.headPic
               : "https://res.cloudinary.com/dok2ttvhu/image/upload/v1574844969/default_face_jaglaw.png"
           }
-          alt="Face"
+          alt="faceResponsive"
         />
 
-        <div className="topImageDiv">
+        <div className="topImageDivResponsive">
         <a target="_blank" href={hm_url_base + this.state.topImage.linkPdp}>
-          <img className="topImage" src={this.state.topImage.imageUrl} alt="" />
+          <img className="topImageResponsive" src={this.state.topImage.imageUrl} alt="" />
         </a>
         </div>
-        <div className="bottomImageDiv">
+        <div className="bottomImageDivResponsive">
         <a target="_blank" href={hm_url_base + this.state.bottomImage.linkPdp}>
           <img
-            className="bottomImage"
+            className="bottomImageResponsive"
             src={this.state.bottomImage.imageUrl}
             alt=""
           />
           </a>
         </div>
-        <div className="shoes">
+        <div className="shoesResponsive">
         <a target="_blank" href={hm_url_base + this.state.shoeImage.linkPdp}>
           <img
-            className="shoeImageLeft"
+            className="shoeImageLeftResponsive"
             src={this.state.shoeImage.imageUrl}
             alt=""
           />
           <img
-            className="shoeImage"
+            className="shoeImageResponsive"
             src={this.state.shoeImage.imageUrl}
             alt=""
           />
