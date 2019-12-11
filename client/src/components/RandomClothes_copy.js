@@ -379,9 +379,9 @@ class AddProject extends React.Component {
     return (
       <div className="master" style={{ height: "800px" }}>
         
-        {/* <Snackbar id="Snackbar"></Snackbar> */}
+        
         {this.state.photo ? (
-          <div className="photoUploaderMaster">
+          <div className="photoUploaderMaster break">
           <UploadPhoto
             // snackbarHandleClick={this.snackbarHandleClick}
             user={this.props.user}
@@ -389,7 +389,7 @@ class AddProject extends React.Component {
             updateUserImage={this.props.updateUserImage}
             toggle={this.togglePhoto}
           ></UploadPhoto>
-          <div className="break"></div></div>
+          </div>
         ) : (
           ""
         )}
