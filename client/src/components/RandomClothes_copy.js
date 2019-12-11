@@ -381,6 +381,7 @@ class AddProject extends React.Component {
         
         {/* <Snackbar id="Snackbar"></Snackbar> */}
         {this.state.photo ? (
+          <div>
           <UploadPhoto
             // snackbarHandleClick={this.snackbarHandleClick}
             user={this.props.user}
@@ -388,9 +389,11 @@ class AddProject extends React.Component {
             updateUserImage={this.props.updateUserImage}
             toggle={this.togglePhoto}
           ></UploadPhoto>
+          <div className="break"></div></div>
         ) : (
           ""
         )}
+        <div width="329px" style={{backgroundColor: "red"}}><p>_________Snackbar Message here</p></div>
         <div className="flexClothes">
           <div className="leftSide" style={{ width: "50px", height: "531px" }}>
             <AddAPhotoTwoToneIcon
