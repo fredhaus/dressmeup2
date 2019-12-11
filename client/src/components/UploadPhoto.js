@@ -62,9 +62,9 @@ class UploadPhoto extends Component {
         <br />
         {/* <div className="photoMaskOverlay">
         </div> */}
-        <div className="photoCamera photoUploaderMaster">
+        <div className="photoCamera ">
           {this.state.dataUri ? (
-            <div className="photoUploaderMaster">
+            <div>
               <img
                 className="photoMaskOverlayImage_after"
                 src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575120710/PhotoOvalOverlay_ejlkoj.png"
@@ -73,7 +73,7 @@ class UploadPhoto extends Component {
               <ImagePreview dataUri={this.state.dataUri} />
             </div>
           ) : (
-            <div className="photoUploaderMaster" style={{ height: "225px" }}>
+            <div className="" style={{ height: "225px" }}>
               <img
                 className="photoMaskOverlayImage"
                 src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575120710/PhotoOvalOverlay_ejlkoj.png"
@@ -84,14 +84,14 @@ class UploadPhoto extends Component {
             </div>
           )}
           {this.state.dataUri ? (
-            <div className="photoIconsDiv photoUploaderMaster">
+            <div className="photoIconsDiv ">
               <CheckCircleTwoToneIcon
                 style={{ filter: "drop-shadow(0 0 0.25rem #b0ffb4)", marginLeft: "50px",height: "35px", width: "35px" ,transform: "rotateY(0deg)",
                 transitionProperty: "all",
                 transitionDuration: "0.5s",
                 transitionTiminFunction:"ease", marginTop:"10px", marginBottom:"10px", opacity:"1"}}
                 onClick={this.submitHandler}
-                className="photoIcon photoUploaderMaster"
+                className="photoIcon "
               />
               <CancelTwoToneIcon
                 style={{ height: "35px", width: "35px", marginTop:"10px", marginBottom:"10px" }}
@@ -103,11 +103,11 @@ class UploadPhoto extends Component {
                 transitionDuration: "0.5s",
                 transitionTiminFunction:"ease", marginTop:"10px", marginBottom:"10px", opacity:"1"}}
                 onClick={this.againHandler}
-                className="photoIcon photoUploaderMaster"
+                className="photoIcon "
               />
             </div>
           ) : (
-            <div className="photoIconsDiv photoUploaderMaster">
+            <div className="photoIconsDiv ">
               <CheckCircleTwoToneIcon
                 style={{ marginLeft: "50px", height: "35px", width: "35px" ,transform: "rotateY(90deg)",
                 transitionProperty: "all",
