@@ -381,7 +381,7 @@ class AddProject extends React.Component {
         
         
         {this.state.photo ? (
-          <div className="photoUploaderMaster break">
+          <div className="photoUploaderMaster">
           <UploadPhoto
             // snackbarHandleClick={this.snackbarHandleClick}
             user={this.props.user}
