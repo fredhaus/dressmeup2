@@ -393,7 +393,7 @@ class AddProject extends React.Component {
         ) : (
           ""
         )}
-        <div width="329px" style={{backgroundColor: "red"}}><p>_________Snackbar Message here</p></div>
+        {/* <div width="329px" style={{backgroundColor: "red"}}><p>_________Snackbar Message here</p></div> */}
         <div className="flexClothes">
           <div className="leftSide" style={{ width: "50px", height: "531px" }}>
             <AddAPhotoTwoToneIcon
