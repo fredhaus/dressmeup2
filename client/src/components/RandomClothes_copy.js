@@ -67,9 +67,12 @@ class AddProject extends React.Component {
     "https://res.cloudinary.com/dok2ttvhu/video/upload/v1576017226/favortie2_ekh8hz.mp3"
   );
 
+  audio_plop = new Audio(
+    "https://res.cloudinary.com/dok2ttvhu/video/upload/v1576098907/19987__acclivity__fingerplop1_erdxa7.mp3"
+  );
 
   shuffle = async () => {
-    console.log(this.state)
+    console.log(this.state);
     if (!this.props.mute) {
       this.audio_shuffle.play();
     }
@@ -139,6 +142,7 @@ class AddProject extends React.Component {
     }
 
     this.setState(prevState => ({
+      favorite: false,
       currentIndexTop: prevState.currentIndexTop + 1,
       currentIndexBottom: prevState.currentIndexBottom + 1,
       currentIndexShoe: prevState.currentIndexShoe + 1
@@ -154,6 +158,7 @@ class AddProject extends React.Component {
       this.audio_swipe.play();
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexTop: prevState.currentIndexTop - 1,
       currentIndexBottom: prevState.currentIndexBottom - 1,
       currentIndexShoe: prevState.currentIndexShoe - 1
@@ -210,26 +215,34 @@ class AddProject extends React.Component {
 
   onClickFavoriteHandler = () => {
     try {
-      if(!this.state.favorite){
+      if (!this.state.favorite) {
         if (!this.props.mute) {
-          this.audio_favorite.play();
+          if (this.props.user){
+            this.audio_favorite.play();
+          }
+          else{
+            this.audio_plop.play();
+          }
         }
-        
       }
       this.setState(prevState => ({
         favorite: !prevState.favorite
       }));
-      let topId = this.state.topArr[this.state.currentIndexTop]._id;
-      let bottomId = this.state.bottomArr[this.state.currentIndexBottom]._id;
-      let shoeId = this.state.shoeArr[this.state.currentIndexShoe]._id;
-      let user = this.state.user._id;
-      axios
-        .post(
-          `/api/garments/favorite?topId=${topId}&bottomId=${bottomId}&shoeId=${shoeId}&user=${user}`
-        )
-        .then(response => {
-          console.log(response);
-        });
+      if (this.props.user) {
+        let topId = this.state.topArr[this.state.currentIndexTop]._id;
+        let bottomId = this.state.bottomArr[this.state.currentIndexBottom]._id;
+        let shoeId = this.state.shoeArr[this.state.currentIndexShoe]._id;
+        let user = this.state.user._id;
+        axios
+          .post(
+            `/api/garments/favorite?topId=${topId}&bottomId=${bottomId}&shoeId=${shoeId}&user=${user}`
+          )
+          .then(response => {
+            console.log(response);
+          });
+      } else {
+        this.props.history.push("/login");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -239,32 +252,6 @@ class AddProject extends React.Component {
     console.log(this.state);
   };
 
-  // deleteBottomId = () => {
-  //   let id = this.state.bottomArr[this.state.currentIndexBottom]._id;
-  //   console.log(id);
-  //   axios.get(`/api/garments/delete?id=${id}`).then(response => {
-  //     console.log(response);
-  //     console.log(id, " has been deleted");
-  //   });
-  // };
-
-  // deleteShoeId = () => {
-  //   let id = this.state.shoeArr[this.state.currentIndexShoe]._id;
-  //   console.log(id);
-  //   axios.get(`/api/garments/delete?id=${id}`).then(response => {
-  //     console.log(response);
-  //     console.log(id, " has been deleted");
-  //   });
-  // };
-
-  // deleteTopId = () => {
-  //   let id = this.state.topArr[this.state.currentIndexTop]._id;
-  //   console.log(id);
-  //   axios.get(`/api/garments/delete?id=${id}`).then(response => {
-  //     console.log(response);
-  //     console.log(id, " has been deleted");
-  //   });
-  // };
 
   togglePhoto = () => {
     if (!this.props.mute) {
@@ -290,10 +277,12 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexTop === this.state.topArr.length - 1) {
       this.setState({
+        favorite: false,
         currentIndexTop: 0
       });
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexTop: prevState.currentIndexTop + 1
     }));
   };
@@ -307,10 +296,12 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexBottom === this.state.bottomArr.length - 1) {
       this.setState({
+        favorite: false,
         currentIndexBottom: 0
       });
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexBottom: prevState.currentIndexBottom + 1
     }));
   };
@@ -324,10 +315,12 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexShoe === this.state.shoeArr.length - 1) {
       this.setState({
+        favorite: false,
         currentIndexShoe: 0
       });
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexShoe: prevState.currentIndexShoe + 1
     }));
   };
@@ -338,10 +331,12 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexTop < 0) {
       this.setState({
+        favorite: false,
         currentIndexTop: this.state.topArr.length - 1
       });
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexTop: prevState.currentIndexTop - 1
     }));
   };
@@ -352,10 +347,12 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexBottom < 0) {
       this.setState({
+        favorite: false,
         currentIndexBottom: this.state.bottomArr.length - 1
       });
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexBottom: prevState.currentIndexBottom - 1
     }));
   };
@@ -367,44 +364,56 @@ class AddProject extends React.Component {
     console.log(this.state.currentIndexShoe);
     if (this.state.currentIndexShoe < 0) {
       this.setState({
+        favorite: false,
         currentIndexShoe: this.state.shoeArr.length - 1
       });
     }
     this.setState(prevState => ({
+      favorite: false,
       currentIndexShoe: prevState.currentIndexShoe - 1
     }));
   };
 
   render() {
     return (
-      <div className="master" style={{ height: "800px" }}>
-        
-        
+      <div className="master" style={{ height: "100vh" }}>
         {this.state.photo ? (
-          
           <UploadPhoto
             // snackbarHandleClick={this.snackbarHandleClick}
             user={this.props.user}
+            snackbar={this.props.snackbar}
             toggleSnackbar={this.props.toggleSnackbar}
             updateUserImage={this.props.updateUserImage}
             toggle={this.togglePhoto}
           ></UploadPhoto>
-          
         ) : (
           ""
         )}
-        {/* <div width="329px" style={{backgroundColor: "red"}}><p>_________Snackbar Message here</p></div> */}
         <div className="flexClothes">
           <div className="leftSide" style={{ width: "50px", height: "531px" }}>
-            <AddAPhotoTwoToneIcon
-              onClick={this.togglePhoto}
-              style={{
-                width: "35px",
-                height: "35px",
-                marginTop: "20px",
-                marginRight: "20px"
-              }}
-            />
+            {this.state.photo ? (
+              <AddAPhotoTwoToneIcon
+                onClick={this.togglePhoto}
+                style={{
+                  width: "35px",
+                  height: "35px",
+                  marginTop: "20px",
+                  marginRight: "20px",
+                  color: "crimson",
+                  filter: "drop-shadow(0 0 0.5rem crimson)"
+                }}
+              />
+            ) : (
+              <AddAPhotoTwoToneIcon
+                onClick={this.togglePhoto}
+                style={{
+                  width: "35px",
+                  height: "35px",
+                  marginTop: "20px",
+                  marginRight: "20px"
+                }}
+              />
+            )}
             <img
               class="arrowDS"
               src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
@@ -735,7 +744,7 @@ class AddProject extends React.Component {
           </div>
         </div>
         <div className="shuffleButtonsAll">
-          <div onClick={this.goToNextSlide}>
+          <div onClick={this.goToNextSlide} className="arrowDSBottomDiv"  style={{marginRight: "30px"}}>
             <img
               class="arrowDSBottom"
               src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
@@ -776,7 +785,7 @@ class AddProject extends React.Component {
               alt=""
             />
           )}
-          <div onClick={this.goToPrevSlide}>
+          <div onClick={this.goToPrevSlide} className="arrowDSBottomDiv" style={{marginLeft: "30px"}}>
             <img
               class="arrowDSBottom"
               src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"

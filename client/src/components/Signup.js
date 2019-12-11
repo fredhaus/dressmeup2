@@ -33,7 +33,7 @@ class Signup extends React.Component {
   render() {
 
     return (
-      <div>
+      <div style={{ height: "100vh" }}>
         SIGNUP:
         <form onSubmit={this.submitHandler}>
           <input name="username" onChange={this.changeHandler} value={this.state.username} type="text" placeholder="username"></input>

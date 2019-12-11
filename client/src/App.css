@@ -29,63 +29,60 @@
   align-items: center;
   text-align: center;
   background-image: linear-gradient(#fff5fa, #e3faff);
-  
 }
 
-
-
-.right{
+.right {
   margin-left: auto;
 }
 
-.flexClothes{
+.flexClothes {
   display: flex;
   flex-wrap: wrap;
   width: 329px;
 }
 
-.flex{
+.flex {
   display: flex;
   flex-wrap: wrap;
 }
 
-.leftSide{
+.leftSide {
   display: flex;
   flex-wrap: wrap;
 }
 
-.rightSide{
+.rightSide {
   display: flex;
   flex-wrap: wrap;
 }
 
-.left{
+.left {
   margin-right: auto;
 }
 
-.dmulogo{
+.dmulogo {
   height: 50px;
   margin-top: 20px;
   margin-left: 20px;
 }
 
-.menuicon{
-  height:30px;
+.menuicon {
+  height: 30px;
   margin: 10px;
+  margin-top: 20px;
 }
 
-.randomClothes{
+.randomClothes {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-
 .backgroundSilouette {
   border: 2px dotted grey;
   /* filter: drop-shadow(0 0 0.5rem crimson); */
   border-radius: 45px;
-  background:#ffffdc;
+  background: #ffffdc;
   /* background-image: linear-gradient(red, yellow, blue); */
   padding: 20px;
   height: 531px;
@@ -100,14 +97,14 @@
   z-index: 0;
   transition-property: all;
   transition-duration: 0.2s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
 .backgroundSilouetteLoading {
   border: 2px dotted grey;
   /* filter: drop-shadow(0 0 0.5rem crimson); */
   border-radius: 45px;
-  background:#ffffdc;
+  background: #ffffdc;
   /* background-image: linear-gradient(red, yellow, blue); */
   padding: 20px;
   height: 531px;
@@ -122,23 +119,21 @@
   z-index: 0;
 }
 
-.favoriteIcon{
-
+.favoriteIcon {
   filter: drop-shadow(0 0 0rem white);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
-
+  transition-timing-function: ease;
 }
 
-.favoriteIconTrans{
+.favoriteIconTrans {
   color: crimson;
   filter: drop-shadow(0 0 0.75rem crimson);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
-.shuffleButtonsAll{
+.shuffleButtonsAll {
   z-index: 10;
   margin-top: -20px;
   display: flex;
@@ -147,20 +142,25 @@
   justify-content: center;
 }
 
-.shuffleButton{
+.shuffleButton {
   z-index: 10;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.arrowDS{
-  
+.arrowDS {
   filter: drop-shadow(0 0 0.25rem #506ffa);
 }
 
-.arrowDSBottom{
-  margin-top: 20px;
-  filter: drop-shadow(0 0 0.25rem green);
+.arrowDSBottom {
+  margin-top: 0px;
+  opacity: 100%;
+  filter: drop-shadow(0 0 0.1rem #506ffa);
+}
+
+.arrowDSBottomDiv {
+  width: 30px;
+  height: 35px;
 }
 
 .face {
@@ -169,7 +169,6 @@
   margin-right: 5px;
   width: auto;
 }
-
 
 .topImage {
   /* z-index: 0; */
@@ -181,7 +180,6 @@
 .topImageDiv {
   z-index: 2;
 }
-
 
 .bottomImage {
   margin-top: -40px;
@@ -197,20 +195,20 @@
 .shoes {
   z-index: 0;
   opacity: 1;
-  margin-top: -20px; 
+  margin-top: -20px;
   width: 180px;
   height: 55px;
-  vertical-align: bottom ;
-  position: relative
+  vertical-align: bottom;
+  position: relative;
 }
 
 .shoesSF {
   opacity: 1;
-  margin-top: -20px; 
+  margin-top: -20px;
   width: 78%;
   height: 10%;
-  vertical-align: bottom ;
-  position: relative
+  vertical-align: bottom;
+  position: relative;
 }
 
 .shoeImage {
@@ -219,7 +217,7 @@
   width: 80px;
   height: auto;
   bottom: 0;
-  left:90px
+  left: 90px;
 }
 
 .shoeImageLeft {
@@ -232,7 +230,7 @@
   width: 80px;
 }
 
-.cardwrapper{
+.cardwrapper {
   display: flex;
   flex-wrap: wrap;
 }
@@ -242,73 +240,63 @@
   height: 0;
 }
 
-.photo{
+.photo {
   width: 300px;
   height: 260px;
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;  
-  margin-bottom: 20px; 
+  margin-top: 20px;
+  margin-bottom: 20px;
   margin-left: 15px;
   margin-right: 14px;
 }
 
-.photoUploaderMaster{
-  z-index: 25;
-}
-
-@media only screen and (max-width: 400px){
-
-  .photo{
+@media only screen and (max-width: 415px) {
+  .photo {
     width: 300px;
     height: 500px;
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;  
-    margin-bottom: 20px; 
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-left: 15px;
-    margin-right: 14px;   
+    margin-right: 14px;
   }
-  .photoMaskOverlayImage{
-    opacity: 0
+  .photoMaskOverlayImage {
+    opacity: 0;
   }
-  .photoMaskOverlayImage_after{
-    opacity: 0
+  .photoMaskOverlayImage_after {
+    opacity: 0;
   }
 }
 
-
-#Snackbar{
-  opacity: 0.5;
-}
-
-.photoMaskOverlay{
+.photoMaskOverlay {
   position: absolute;
   z-index: 1;
 }
 
-.photoCamera{
+.photoCamera {
   position: absolute;
   width: 200px;
 }
 
-.photoMaskOverlayImage{
+.photoMaskOverlayImage {
   position: absolute;
   width: 300px;
   border-radius: 45px;
-  ; filter: drop-shadow(0 0 0.5rem crimson);
+  filter: drop-shadow(0 0 0.5rem crimson);
   z-index: 2;
   top: 0;
-  left: 0
+  left: 0;
 }
 
-.photoMaskOverlayImage_after{
+.photoMaskOverlayImage_after {
   position: absolute;
   width: 300px;
   border-radius: 45px;
-  ; filter: drop-shadow(0 0 0.5rem blue);
+  filter: drop-shadow(0 0 0.5rem blue);
   z-index: 2;
   top: 0;
   left: 0;
@@ -317,33 +305,31 @@
   /* transition-timing-function:ease; */
 }
 
-.photoIconsDiv{
+.photoIconsDiv {
   width: 300px;
   display: flex;
   justify-content: space-between;
 }
 
-.photoIcon{
+.photoIcon {
   transform: rotateY(0deg);
   transition-property: all;
   transition-duration: 1s;
-  transition-timing-function:ease;
-  
+  transition-timing-function: ease;
 }
 
-.photoIconHidden{
+.photoIconHidden {
   transform: rotateY(90deg);
   transition-property: all;
   transition-duration: 1s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-#container-circles{
+#container-circles {
   z-index: 3;
 }
 
-
-.slider{
+.slider {
   position: relative;
 }
 
@@ -387,18 +373,17 @@
   transition-timing-function:ease;
 } */
 
-.slideImageTop{
-  
+.slideImageTop {
   margin-top: -20px;
   height: 200px;
   opacity: 1;
   transform: translateX(0%);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-.slideImageRightTop{
+.slideImageRightTop {
   position: absolute;
   left: 0;
   top: 0;
@@ -411,16 +396,15 @@
   transition-timing-function:ease;   */
 }
 
-.displayNone{
-  display:none;
+.displayNone {
+  display: none;
 }
 
-.slideImageLeftDisplayNone{
-  display:none;
+.slideImageLeftDisplayNone {
+  display: none;
 }
 
-.slideImageLeftTop{
-  
+.slideImageLeftTop {
   position: absolute;
   left: 0;
   top: 0;
@@ -430,89 +414,89 @@
   transform: translateX(-100%) rotate3d(0, 1, 0, 90deg) scale(0.8, 0.8);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-.slideImageBottom{
+.slideImageBottom {
   margin-top: -40px;
   height: 215px;
   opacity: 1;
   transform: translateX(0%);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-.slideImageRightBottom{
+.slideImageRightBottom {
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0%;
   height: 215px;
   margin-top: -40px;
-  transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);;
+  transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
 }
 
-.slideImageLeftBottom{
+.slideImageLeftBottom {
   position: absolute;
   left: 0;
   top: 0;
   height: 215px;
   opacity: 0%;
   margin-top: -40px;
-  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);;
+  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-.slideImageShoe{
-  margin-top: 0px; 
+.slideImageShoe {
+  margin-top: 0px;
   width: 180px;
   height: 55px;
   opacity: 1;
-  vertical-align: bottom ;
+  vertical-align: bottom;
   position: relative;
   transform: translateX(0%);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-.slideImageRightShoe{
+.slideImageRightShoe {
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0%;
-  margin-top: -20px; 
+  margin-top: -20px;
   width: 180px;
   height: 55px;
   transform: translateX(100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
 }
 
-.slideImageLeftShoe{
+.slideImageLeftShoe {
   position: absolute;
   left: 0;
   top: 0;
   opacity: 0%;
-  margin-top: -20px; 
+  margin-top: -20px;
   width: 180px;
   height: 55px;
-  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);;
+  transform: translateX(-100%) rotate3d(0, 1, 0, 80deg) scale(0.8, 0.8);
   transition-property: all;
   transition-duration: 0.5s;
-  transition-timing-function:ease;
+  transition-timing-function: ease;
 }
 
-.slideShoeRight{
+.slideShoeRight {
   position: absolute;
   width: 80px;
   height: auto;
   bottom: 0;
-  left:90px
+  left: 90px;
 }
 
-.slideShoeLeft{
+.slideShoeLeft {
   position: absolute;
   left: 10px;
   bottom: 0;
@@ -522,15 +506,13 @@
   width: 80px;
 }
 
-.buttonTest{
+.buttonTest {
   color: blue;
 }
 
-
-
-
-
-
+.snackbar {
+  background-color: red;
+}
 
 .backgroundSilouetteResponsive {
   height: 275px;
@@ -542,48 +524,86 @@
   align-items: center;
   flex-direction: column;
   z-index: 0;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
+.backgroundSilouetteResponsiveFav {
+  border: 2px dotted grey;
+  border-radius: 25px;
+  
+  
+  
+  height: 275px;
+  width: 114px;
+  background-image: url("https://res.cloudinary.com/dok2ttvhu/image/upload/v1574689037/Silouette_relief_blank_imm4sn.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  z-index: 0;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+}
 
 .faceResponsive {
   z-index: 3;
   height: 42px;
   margin-right: 5px;
   width: auto;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
-
 
 .topImageResponsive {
   /* z-index: 0; */
   margin-top: -10px;
   height: 100px;
   opacity: 1;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .topImageDivResponsive {
   z-index: 2;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
-
 
 .bottomImageResponsive {
   margin-top: -20px;
   height: 107px;
   opacity: 1;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .bottomImageDivResponsive {
   z-index: 1;
   opacity: 1;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .shoesResponsive {
   z-index: 0;
   opacity: 1;
-  margin-top: -10px; 
+  margin-top: -10px;
   width: 90px;
   height: 27px;
-  vertical-align: bottom ;
-  position: relative
+  vertical-align: bottom;
+  position: relative;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .shoeImageResponsive {
@@ -592,7 +612,10 @@
   width: 40px;
   height: auto;
   bottom: 0;
-  left:45px
+  left: 45px;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
 
 .shoeImageLeftResponsive {
@@ -603,4 +626,7 @@
   transform: rotateY(180deg);
   height: auto;
   width: 40px;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
 }
