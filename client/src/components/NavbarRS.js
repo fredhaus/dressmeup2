@@ -69,8 +69,6 @@ class TemporaryDrawer extends React.Component {
             </ListItem>
           </Link>
 
-          {this.props.user && this.props.user.name ? (
-
             <Link style={{ textDecoration: "none", color: "black" }}>
               <ListItem button onClick={this.props.logouthandler}>
                 <ListItemIcon>
@@ -80,7 +78,7 @@ class TemporaryDrawer extends React.Component {
                 <ListItemText primary="Log out" />
               </ListItem>
             </Link>
-          ) : (
+          
             <Link
             style={{ textDecoration: "none", color: "black" }}
             to={`/login`}
@@ -94,7 +92,7 @@ class TemporaryDrawer extends React.Component {
             </ListItem>
           </Link>
             
-          )}
+      
         </List>
         <Divider />
         <List>
