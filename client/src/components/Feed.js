@@ -3,6 +3,7 @@ import axios from "axios";
 import { withRouter } from "react-router-dom";
 import FeedGallerySingle from "./FeedGallerySingle";
 import _ from "lodash";
+import NewReleasesTwoToneIcon from '@material-ui/icons/NewReleasesTwoTone';
 
 class Feed extends React.Component {
   state = {
@@ -36,6 +37,11 @@ class Feed extends React.Component {
   render() {
     return (
       <div className="cardwrapper">
+        <div className="sectionHead"> 
+        <h3><NewReleasesTwoToneIcon style={{width: "35px", height: "35px", color: "orange"}}></NewReleasesTwoToneIcon>
+           Feed 
+          <NewReleasesTwoToneIcon style={{width: "35px", height: "35px", color: "orange"}}></NewReleasesTwoToneIcon></h3></div>
+        <div className="break"></div>
         {this.state.outfits.map((outfit, i) => {
           return (
             <FeedGallerySingle

@@ -69,7 +69,8 @@ class TemporaryDrawer extends React.Component {
             </ListItem>
           </Link>
 
-          {this.props.user ? (
+          {this.props.user && this.props.user.name ? (
+
             <Link style={{ textDecoration: "none", color: "black" }}>
               <ListItem button onClick={this.props.logouthandler}>
                 <ListItemIcon>
