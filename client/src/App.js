@@ -175,7 +175,7 @@ class App extends React.Component {
                 return (
                   <div>
                     <Login updateUser={this.updateUserHandler}></Login>
-                    <div> ------------------------ </div>
+                    <div> –––––––––––––––– </div>
                     <Signup updateUser={this.updateUserHandler}></Signup>
                   </div>
                 );
