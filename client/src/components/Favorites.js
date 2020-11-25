@@ -13,10 +13,8 @@ class Favorites extends React.Component {
 
   getAllOutfits = () => {
     axios.get("/api/garments/outfits", this.state).then(response => {
-      // console.log(response)
       this.setState({ outfits: response.data, isLoading: false }); // this triggers a re-render
 
-      //response.data : [{"_id":"5ddea791c724a8b762cd6bab","topImage":"5ddd7bc7fbc3daa3a3501595","bottomImage":"5ddd7bc7fbc3daa3a3501596","shoeImage":"5ddd7bc7fbc3daa3a3501597","owner":"5dde3b7e7f9238b3411c4537","__v":0}]
     });
   };
 

@@ -22,7 +22,6 @@ class UploadPhoto extends Component {
   onTakePhotoAnimationDone(dataUri) {
     console.log("takePhoto");
     this.setState({ dataUri });
-    // console.log(this.state.dataUri);
   }
 
   againHandler() {
@@ -43,7 +42,6 @@ class UploadPhoto extends Component {
         })
         .then(response => {
           console.log(response.data); //Image URL!
-          // let user = { username: this.props.user.username };
           this.props.updateUserImage(response.data);
         });
     }
@@ -60,8 +58,7 @@ class UploadPhoto extends Component {
         
         <br />
         <br />
-        {/* <div className="photoMaskOverlay">
-        </div> */}
+
         <div className="photoCamera ">
           {this.state.dataUri ? (
             <div>

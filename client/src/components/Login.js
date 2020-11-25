@@ -10,6 +10,7 @@ class Login extends React.Component {
   };
 
   submitHandler = event => {
+    console.log("SUBMIT HANDLER")
     event.preventDefault();
     axios
       .post("/api/auth/login", this.state)

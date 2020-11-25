@@ -6,30 +6,44 @@ class Signup extends React.Component {
   state = {
     username: "",
     password: "",
-    error: ""
+    error: "",
+    confirmed: "",
   };
 
-  submitHandler = event => {
+  submitHandler = (event) => {
     event.preventDefault();
     axios
       .post("/api/auth/signup", this.state)
-      .then(response => {
+      .then((response) => {
         console.log("Signup", response.data);
         this.props.updateUser(response.data);
         this.props.history.push("/");
       })
-      .catch(error => {
-        // console.log(error)
-        // this.setState({
-        // error: error.response.data.message
-        // })
+      .catch((error) => {
+        this.setState({
+          error: error.response.data.message,
+        });
       });
   };
 
-  changeHandler = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  // 8 Charactrs, one Capital, one Number
+  alphanumeric = (string) => {
+    return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(string);
+  };
+
+  changeHandler = (event) => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => {
+        this.setState(
+          {
+            confirmed: this.alphanumeric(this.state.password),
+          },
+        );
+      }
+    );
   };
 
   render() {
@@ -52,17 +66,63 @@ class Signup extends React.Component {
             value={this.state.password}
             placeholder="password"
           ></input>
-          {/* <p>{this.state.error}</p> */}
           <br></br>
 
-          <button
-            style={{ marginTop: "5px", border: "none", borderRadius: "10px" }}
-            type="submit"
-          >
+          {this.state.confirmed ? (
+            <button
+              style={{ marginTop: "5px", border: "none", borderRadius: "10px" }}
+              type="submit"
+            >
+              <ControlPointDuplicateTwoToneIcon
+                style={{ color: "blue", width: "35px", height: "35px" }}
+              />
+            </button>
+          ) : (
             <ControlPointDuplicateTwoToneIcon
-              style={{ color: "blue", width: "35px", height: "35px" }}
+              style={{
+                color: "blue",
+                marginTop: "5px",
+                border: "none",
+                borderRadius: "10px",
+                width: "35px",
+                height: "35px",
+                opacity: "0.2",
+              }}
             />
-          </button>
+          )}
+          <br />
+          {this.state.error ? (
+            <div>
+              <span style={{ color: "red" }}>
+                <b>This username is already taken.</b>
+                <br />
+                Please choose another username
+              </span>
+            </div>
+          ) : (
+            ""
+          )}
+          {this.state.password ? (
+            <div>
+              {this.state.confirmed ? (
+                <div>
+                  <span style={{ color: "green" }}>
+                    Password must contain <br />
+                    <b>8 Characters, one Capital Letter, one Number</b>
+                  </span>
+                </div>
+              ) : (
+                <div>
+                  <span style={{ color: "red" }}>
+                    Password must contain <br />
+                    <b>8 Characters, one Capital Letter, one Number</b>
+                  </span>
+                </div>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
         </form>
       </div>
     );

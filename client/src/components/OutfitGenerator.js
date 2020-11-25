@@ -2,13 +2,9 @@ import React from "react";
 import axios from "axios";
 import _ from "lodash";
 import UploadPhoto from "./UploadPhoto";
-import Slider from "./Slider";
 import Slide3 from "./Slide_3";
 import Slide4 from "./Slide_4";
 import { withRouter } from "react-router-dom";
-import CameraMobile from "./CameraMobile";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import FavoriteBorderTwoToneIcon from "@material-ui/icons/FavoriteBorderTwoTone";
 import AddAPhotoTwoToneIcon from "@material-ui/icons/AddAPhotoTwoTone";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 
@@ -25,7 +21,7 @@ let colors = [
   "#03fc77",
   "#e3fc03",
   "#fcc603",
-  "#fc3903"
+  "#fc3903",
 ];
 let hm_url_base = "https://www2.hm.com";
 let transSpeed = 0.5;
@@ -49,7 +45,7 @@ class AddProject extends React.Component {
     shuffle: false,
     photo: false,
     snackbar: false,
-    mute: this.props.mute
+    mute: this.props.mute,
   };
 
   audio_shuffle = new Audio(
@@ -72,19 +68,19 @@ class AddProject extends React.Component {
   );
 
   shuffle = async () => {
-    console.log(this.state);
+    
     if (!this.props.mute) {
       this.audio_shuffle.play();
     }
 
-    this.setState(prevState => ({
-      shuffle: !prevState.shuffle
+    this.setState((prevState) => ({
+      shuffle: !prevState.shuffle,
     }));
 
     let ShuffledColors = _.shuffle(colors);
 
     function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     }
     let sleepTime = 300;
     let shuffleNr = 10;
@@ -97,7 +93,7 @@ class AddProject extends React.Component {
         sleepTime = sleepTime + 30; // slowing down
       }
       transSpeed = sleepTime * 0.001;
-      // console.log(sleepTime)
+      
       await sleep(sleepTime).then(() => {
         this.goToNextSlide();
       });
@@ -105,8 +101,8 @@ class AddProject extends React.Component {
     transSpeed = 0.5;
     bgColor = "crimson";
 
-    this.setState(prevState => ({
-      shuffle: !prevState.shuffle
+    this.setState((prevState) => ({
+      shuffle: !prevState.shuffle,
     }));
   };
 
@@ -119,7 +115,7 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexTop === this.state.topArr.length - 1) {
       this.setState({
-        currentIndexTop: 0
+        currentIndexTop: 0,
       });
     }
 
@@ -128,7 +124,7 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexBottom === this.state.bottomArr.length - 1) {
       this.setState({
-        currentIndexBottom: 0
+        currentIndexBottom: 0,
       });
     }
 
@@ -137,35 +133,29 @@ class AddProject extends React.Component {
     }
     if (this.state.currentIndexShoe === this.state.shoeArr.length - 1) {
       this.setState({
-        currentIndexShoe: 0
+        currentIndexShoe: 0,
       });
     }
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
       currentIndexTop: prevState.currentIndexTop + 1,
       currentIndexBottom: prevState.currentIndexBottom + 1,
-      currentIndexShoe: prevState.currentIndexShoe + 1
+      currentIndexShoe: prevState.currentIndexShoe + 1,
     }));
-    // console.log("TOP", this.state.currentIndexTop)
-    // console.log("BOTTOM", this.state.currentIndexBottom)
-    // console.log("SHOE", this.state.currentIndexShoe)
-    // console.log(this.props.history.push(""))
   };
 
   goToPrevSlide = () => {
     if (!this.props.mute && !this.state.shuffle) {
       this.audio_swipe.play();
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
       currentIndexTop: prevState.currentIndexTop - 1,
       currentIndexBottom: prevState.currentIndexBottom - 1,
-      currentIndexShoe: prevState.currentIndexShoe - 1
+      currentIndexShoe: prevState.currentIndexShoe - 1,
     }));
   };
-
-  //////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES//////////// MINUES CASE HANDLES
 
   fillTopArryay = () => {
     axios
@@ -173,10 +163,10 @@ class AddProject extends React.Component {
         `/api/garments/get_m_many_tops?limit=${limit}&offset=${this.state.topArr.length}`,
         this.state
       )
-      .then(response => {
+      .then((response) => {
         let newData = _.shuffle(response.data);
         this.setState({
-          topArr: [...this.state.topArr, ...newData]
+          topArr: [...this.state.topArr, ...newData],
         });
       });
   };
@@ -187,9 +177,9 @@ class AddProject extends React.Component {
         `/api/garments/get_m_many_bottoms?limit=${limit}&offset=${this.state.topArr.length}`,
         this.state
       )
-      .then(response => {
+      .then((response) => {
         this.setState({
-          bottomArr: [...this.state.bottomArr, ...response.data]
+          bottomArr: [...this.state.bottomArr, ...response.data],
         });
       });
   };
@@ -200,9 +190,9 @@ class AddProject extends React.Component {
         `/api/garments/get_m_many_shoes?limit=${limit}&offset=${this.state.topArr.length}`,
         this.state
       )
-      .then(response => {
+      .then((response) => {
         this.setState({
-          shoeArr: [...this.state.shoeArr, ...response.data]
+          shoeArr: [...this.state.shoeArr, ...response.data],
         });
       });
   };
@@ -217,16 +207,15 @@ class AddProject extends React.Component {
     try {
       if (!this.state.favorite) {
         if (!this.props.mute) {
-          if (this.props.user){
+          if (this.props.user) {
             this.audio_favorite.play();
-          }
-          else{
+          } else {
             this.audio_plop.play();
           }
         }
       }
-      this.setState(prevState => ({
-        favorite: !prevState.favorite
+      this.setState((prevState) => ({
+        favorite: !prevState.favorite,
       }));
       if (this.props.user) {
         let topId = this.state.topArr[this.state.currentIndexTop]._id;
@@ -237,14 +226,14 @@ class AddProject extends React.Component {
           .post(
             `/api/garments/favorite?topId=${topId}&bottomId=${bottomId}&shoeId=${shoeId}&user=${user}`
           )
-          .then(response => {
-            console.log(response);
+          .then((response) => {
+            
           });
       } else {
         this.props.history.push("/login");
       }
     } catch (err) {
-      console.error(err);
+      
     }
   };
 
@@ -252,19 +241,18 @@ class AddProject extends React.Component {
     console.log(this.state);
   };
 
-
   togglePhoto = () => {
     if (!this.props.mute) {
       this.audio_swoosh.play();
     }
-    this.setState(prevState => ({
-      photo: !prevState.photo
+    this.setState((prevState) => ({
+      photo: !prevState.photo,
     }));
   };
 
   snackbarHandleClick = () => {
-    this.setState(prevState => ({
-      snackbar: !prevState.photo
+    this.setState((prevState) => ({
+      snackbar: !prevState.photo,
     }));
   };
 
@@ -278,12 +266,12 @@ class AddProject extends React.Component {
     if (this.state.currentIndexTop === this.state.topArr.length - 1) {
       this.setState({
         favorite: false,
-        currentIndexTop: 0
+        currentIndexTop: 0,
       });
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
-      currentIndexTop: prevState.currentIndexTop + 1
+      currentIndexTop: prevState.currentIndexTop + 1,
     }));
   };
 
@@ -297,12 +285,12 @@ class AddProject extends React.Component {
     if (this.state.currentIndexBottom === this.state.bottomArr.length - 1) {
       this.setState({
         favorite: false,
-        currentIndexBottom: 0
+        currentIndexBottom: 0,
       });
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
-      currentIndexBottom: prevState.currentIndexBottom + 1
+      currentIndexBottom: prevState.currentIndexBottom + 1,
     }));
   };
 
@@ -316,12 +304,12 @@ class AddProject extends React.Component {
     if (this.state.currentIndexShoe === this.state.shoeArr.length - 1) {
       this.setState({
         favorite: false,
-        currentIndexShoe: 0
+        currentIndexShoe: 0,
       });
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
-      currentIndexShoe: prevState.currentIndexShoe + 1
+      currentIndexShoe: prevState.currentIndexShoe + 1,
     }));
   };
 
@@ -332,12 +320,12 @@ class AddProject extends React.Component {
     if (this.state.currentIndexTop < 0) {
       this.setState({
         favorite: false,
-        currentIndexTop: this.state.topArr.length - 1
+        currentIndexTop: this.state.topArr.length - 1,
       });
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
-      currentIndexTop: prevState.currentIndexTop - 1
+      currentIndexTop: prevState.currentIndexTop - 1,
     }));
   };
 
@@ -348,12 +336,12 @@ class AddProject extends React.Component {
     if (this.state.currentIndexBottom < 0) {
       this.setState({
         favorite: false,
-        currentIndexBottom: this.state.bottomArr.length - 1
+        currentIndexBottom: this.state.bottomArr.length - 1,
       });
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
-      currentIndexBottom: prevState.currentIndexBottom - 1
+      currentIndexBottom: prevState.currentIndexBottom - 1,
     }));
   };
 
@@ -361,16 +349,16 @@ class AddProject extends React.Component {
     if (!this.props.mute && !this.state.shuffle) {
       this.audio_swipe.play();
     }
-    console.log(this.state.currentIndexShoe);
+    
     if (this.state.currentIndexShoe < 0) {
       this.setState({
         favorite: false,
-        currentIndexShoe: this.state.shoeArr.length - 1
+        currentIndexShoe: this.state.shoeArr.length - 1,
       });
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       favorite: false,
-      currentIndexShoe: prevState.currentIndexShoe - 1
+      currentIndexShoe: prevState.currentIndexShoe - 1,
     }));
   };
 
@@ -379,7 +367,6 @@ class AddProject extends React.Component {
       <div className="master" style={{ height: "100vh" }}>
         {this.state.photo ? (
           <UploadPhoto
-            // snackbarHandleClick={this.snackbarHandleClick}
             user={this.props.user}
             snackbar={this.props.snackbar}
             toggleSnackbar={this.props.toggleSnackbar}
@@ -400,7 +387,7 @@ class AddProject extends React.Component {
                   marginTop: "20px",
                   marginRight: "20px",
                   color: "crimson",
-                  filter: "drop-shadow(0 0 0.5rem crimson)"
+                  filter: "drop-shadow(0 0 0.5rem crimson)",
                 }}
               />
             ) : (
@@ -410,7 +397,7 @@ class AddProject extends React.Component {
                   width: "35px",
                   height: "35px",
                   marginTop: "20px",
-                  marginRight: "20px"
+                  marginRight: "20px",
                 }}
               />
             )}
@@ -423,7 +410,7 @@ class AddProject extends React.Component {
                 zIndex: "3",
                 width: "25px",
                 height: "52px",
-                marginRight: "20px"
+                marginRight: "20px",
               }}
             />
             <img
@@ -435,7 +422,7 @@ class AddProject extends React.Component {
                 zIndex: "3",
                 width: "25px",
                 height: "52px",
-                marginRight: "20px"
+                marginRight: "20px",
               }}
             />
             <img
@@ -447,7 +434,7 @@ class AddProject extends React.Component {
                 zIndex: "3",
                 width: "25px",
                 height: "52px",
-                marginRight: "20px"
+                marginRight: "20px",
               }}
             />
           </div>
@@ -464,13 +451,11 @@ class AddProject extends React.Component {
                   <img
                     className="face"
                     width="90px"
-                    // src={this.user.headPic}
                     src={
                       this.props.user
                         ? this.props.user.headPic
                         : "https://res.cloudinary.com/dok2ttvhu/image/upload/v1574844969/default_face_jaglaw.png"
                     }
-                    //"https://res.cloudinary.com/dok2ttvhu/image/upload/v1574796842/arnieProxyFace_ttegde.png"
                     alt="Face"
                   />
 
@@ -664,9 +649,6 @@ class AddProject extends React.Component {
                 <div className="backgroundSilouetteLoading"></div>
               </div>
             )}
-            {/* <button onClick={this.deleteTopId}> delete TOP ID </button>
-        <button onClick={this.deleteBottomId}> delete BOTTOM ID </button>
-        <button onClick={this.deleteShoeId}> Delete SHOE ID </button> */}
           </div>
           <div className="rightSide" style={{ width: "50px", height: "531px" }}>
             {this.state.favorite ? (
@@ -681,7 +663,7 @@ class AddProject extends React.Component {
                   transitionDuration: "0.2s",
                   transitionTimingFunction: "ease",
                   color: "crimson",
-                  filter: "drop-shadow(0 0 0.75rem crimson)"
+                  filter: "drop-shadow(0 0 0.75rem crimson)",
                 }}
                 onClick={this.onClickFavoriteHandler}
               />
@@ -696,7 +678,7 @@ class AddProject extends React.Component {
                   marginLeft: "10px",
                   transitionProperty: "all",
                   transitionDuration: "0.2s",
-                  transitionTimingFunction: "ease"
+                  transitionTimingFunction: "ease",
                 }}
                 onClick={this.onClickFavoriteHandler}
               />
@@ -710,7 +692,7 @@ class AddProject extends React.Component {
                 zIndex: "3",
                 width: "25px",
                 height: "52px",
-                marginLeft: "20px"
+                marginLeft: "20px",
                 // marginRight: "20px",
               }}
             ></img>
@@ -723,28 +705,30 @@ class AddProject extends React.Component {
                 zIndex: "3",
                 width: "25px",
                 height: "52px",
-                marginLeft: "20px"
+                marginLeft: "20px",
                 // marginRight: "20px",
               }}
             ></img>
             <img
               alt=""
               class="arrowDS"
-              // src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
               src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
               onClick={this.shoeMinus}
               style={{
                 zIndex: "3",
                 width: "25px",
                 height: "52px",
-                marginLeft: "20px"
-                // marginRight: "20px",
+                marginLeft: "20px",
               }}
             ></img>
           </div>
         </div>
         <div className="shuffleButtonsAll">
-          <div onClick={this.goToNextSlide} className="arrowDSBottomDiv"  style={{marginRight: "30px"}}>
+          <div
+            onClick={this.goToNextSlide}
+            className="arrowDSBottomDiv"
+            style={{ marginRight: "30px" }}
+          >
             <img
               class="arrowDSBottom"
               src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_left_nalwbx.png"
@@ -753,7 +737,7 @@ class AddProject extends React.Component {
               style={{
                 zIndex: "3",
                 width: "12px",
-                height: "25px"
+                height: "25px",
               }}
             ></img>
             <img
@@ -764,7 +748,7 @@ class AddProject extends React.Component {
               style={{
                 zIndex: "3",
                 width: "12px",
-                height: "25px"
+                height: "25px",
               }}
             ></img>
           </div>
@@ -785,7 +769,11 @@ class AddProject extends React.Component {
               alt=""
             />
           )}
-          <div onClick={this.goToPrevSlide} className="arrowDSBottomDiv" style={{marginLeft: "30px"}}>
+          <div
+            onClick={this.goToPrevSlide}
+            className="arrowDSBottomDiv"
+            style={{ marginLeft: "30px" }}
+          >
             <img
               class="arrowDSBottom"
               src="https://res.cloudinary.com/dok2ttvhu/image/upload/v1575980275/arrow_right_aw3xnb.png"
@@ -794,7 +782,7 @@ class AddProject extends React.Component {
               style={{
                 zIndex: "3",
                 width: "12px",
-                height: "25px"
+                height: "25px",
               }}
             ></img>
             <img
@@ -805,12 +793,11 @@ class AddProject extends React.Component {
               style={{
                 zIndex: "3",
                 width: "12px",
-                height: "25px"
+                height: "25px",
               }}
             ></img>
           </div>
         </div>
-        {/* <CameraMobile></CameraMobile> */}
       </div>
     );
   }
