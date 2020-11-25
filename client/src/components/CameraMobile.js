@@ -29,7 +29,6 @@ class CameraMobile extends React.Component {
       <div>
         <h1>CameraMobile</h1>
         <form onSubmit={this.submitHandler}>
-          {/* <form onSubmit={this.submitHandler}> */}
           <input name="dataUri" onChange={this.changeHandler} type="file" accept="image/*" />
           <button type="submit">Submit</button>
         </form>

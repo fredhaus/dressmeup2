@@ -18,16 +18,16 @@ import WbSunnyTwoToneIcon from "@material-ui/icons/WbSunnyTwoTone";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import DynamicFeedTwoToneIcon from "@material-ui/icons/DynamicFeedTwoTone";
 import EmojiPeopleTwoToneIcon from "@material-ui/icons/EmojiPeopleTwoTone";
-import StarHalfTwoToneIcon from '@material-ui/icons/StarHalfTwoTone';
+import StarHalfTwoToneIcon from "@material-ui/icons/StarHalfTwoTone";
 
 const styles = {
   root: {},
   list: {
-    width: 200
+    width: 200,
   },
   fullList: {
-    width: "auto"
-  }
+    width: "auto",
+  },
 };
 
 class TemporaryDrawer extends React.Component {
@@ -35,10 +35,10 @@ class TemporaryDrawer extends React.Component {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   };
 
-  toggleDrawer = (side, open) => event => {
+  toggleDrawer = (side, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -51,7 +51,7 @@ class TemporaryDrawer extends React.Component {
 
   render() {
     const classes = this.props.classes;
-    const sideList = side => (
+    const sideList = (side) => (
       <div
         className={classes.list}
         role="presentation"
@@ -69,6 +69,7 @@ class TemporaryDrawer extends React.Component {
             </ListItem>
           </Link>
 
+          {this.props.user ? (
             <Link style={{ textDecoration: "none", color: "black" }}>
               <ListItem button onClick={this.props.logouthandler}>
                 <ListItemIcon>
@@ -78,21 +79,20 @@ class TemporaryDrawer extends React.Component {
                 <ListItemText primary="Log out" />
               </ListItem>
             </Link>
-          
+          ) : (
             <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to={`/login`}
-          >
-            <ListItem button>
-              <ListItemIcon>
-                {" "}
-                <AccountCircleTwoToneIcon style={{ color: "#506ffa" }} />{" "}
-              </ListItemIcon>
-              <ListItemText primary="Log in / Sign up" />
-            </ListItem>
-          </Link>
-            
-      
+              style={{ textDecoration: "none", color: "black" }}
+              to={`/login`}
+            >
+              <ListItem button>
+                <ListItemIcon>
+                  {" "}
+                  <AccountCircleTwoToneIcon style={{ color: "#506ffa" }} />{" "}
+                </ListItemIcon>
+                <ListItemText primary="Log in / Sign up" />
+              </ListItem>
+            </Link>
+          )}
         </List>
         <Divider />
         <List>
@@ -103,7 +103,7 @@ class TemporaryDrawer extends React.Component {
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <FavoriteTwoToneIcon style={{color: "red"}}/>{" "}
+                <FavoriteTwoToneIcon style={{ color: "red" }} />{" "}
               </ListItemIcon>
               <ListItemText primary="My Outfits" />
             </ListItem>
@@ -112,16 +112,19 @@ class TemporaryDrawer extends React.Component {
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <DynamicFeedTwoToneIcon style={{color: "darkblue"}}/>{" "}
+                <DynamicFeedTwoToneIcon style={{ color: "darkblue" }} />{" "}
               </ListItemIcon>
               <ListItemText primary="Outfit Feed" />
             </ListItem>
           </Link>
-          <Link style={{ textDecoration: "none", color: "black" }} to={`/about`}>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to={`/about`}
+          >
             <ListItem button>
               <ListItemIcon>
                 {" "}
-                <StarHalfTwoToneIcon style={{color: "blueviolet"}}/>
+                <StarHalfTwoToneIcon style={{ color: "blueviolet" }} />
               </ListItemIcon>
               <ListItemText primary="About" />
             </ListItem>
@@ -130,7 +133,7 @@ class TemporaryDrawer extends React.Component {
       </div>
     );
 
-    const fullList = side => (
+    const fullList = (side) => (
       <div
         className={classes.fullList}
         role="presentation"

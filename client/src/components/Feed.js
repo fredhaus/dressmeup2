@@ -15,8 +15,7 @@ class Feed extends React.Component {
   getAllOutfits = () => {
     axios.get("/api/garments/alloutfits", this.state).then(response => {
       let newData = _.shuffle(response.data)
-      // console.log(response)
-      this.setState({ outfits: newData, isLoading: false }); // this triggers a re-render
+      this.setState({ outfits: newData, isLoading: false });
     });
   };
 
