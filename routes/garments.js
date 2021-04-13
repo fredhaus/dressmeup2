@@ -24,7 +24,6 @@ router.get("/console", (req, res, next) => {
 });
 
 router.post("/insertshoes", (req, res, next) => {
-  // pupeteer
   console.log("saving");
   Garments_m.collection.insertMany(manualShoes);
 });
@@ -83,11 +82,8 @@ router.get("/get_m_many_tops", (req, res, next) => {
     topBottomShoe: "top",
     imageUrl: { $exists: true },
     "articles.color.text": { $not: /(wei(ss|ß)|hellgrau|hellbeige|hellrosa)/i },
-    // articleColorNames: { $not: /(wei(ss|ß)|grau)/i }
   };
 
-  // console.log("LIMIT :", limit);
-  // console.log("OFFSET :", offset);
   
   Garments_m.find(q)
     .limit(limit)
@@ -100,9 +96,6 @@ router.get("/get_m_many_tops", (req, res, next) => {
 router.get("/get_m_many_bottoms", (req, res, next) => {
   let limit = parseInt(req.query.limit); //für DB
   let offset = parseInt(req.query.offset); //für "Page"
-
-  console.log("LIMIT :", limit);
-  console.log("OFFSET :", offset);
   
   Garments_m.find({
     topBottomShoe: "bottom",
@@ -153,11 +146,11 @@ router.get("/outfits", (req, res, next) => {
 
     .populate("topImage")
     .populate("bottomImage")
-    .populate("shoeImage")
+    .populate("shoeImage") 
     .then(Outfits => {
       res.json(Outfits);
     })
-    .catch(error => console.log("something is reallz wrong", error));
+    .catch(error => console.log("Error: ", error));
 });
 
 router.get("/alloutfits", (req, res, next) => {
@@ -169,21 +162,13 @@ router.get("/alloutfits", (req, res, next) => {
     .then(Outfits => {
       res.json(Outfits);
     })
-    .catch(error => console.log("something is reallz wrong", error));
+    .catch(error => console.log("Error: ", error));
 });
-
-// router.get("/:id", (req, res, next) => {
-
-//   Garments_m.findById({ req }).then((Outfits) => {
-//       res.json(Outfits)
-//     })
-// });
 
 router.get("/delete", (req, res, next) => {
   let id = req.query.id; //für DB
   console.log(id)
   Garments_m.findOneAndRemove({_id: id}).then((response) =>{
-  // Garments_m.findById(id).then((response) =>{
     res.json({ response });
     console.log(response)
     console.log(id, " has been delelted")
